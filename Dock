@@ -3961,7 +3961,7 @@ Position = UDim2.new(0.025,0,0,0);
 Parent = window.Content;
 })
 
-local label = CreateInstance('TextLabel',{Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size24,Text={prwefix} {table.concat(list, \n{prwefix} )},TextColor3=Color3.fromRGB(255,255,255),TextScaled=false,TextSize=23,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=Enum.TextXAlignment.Left,TextYAlignment=Enum.TextYAlignment.Top,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.025,0,0),Rotation=0,Selectable=false,Size=UDim2.new(0, 271, 0, 99999),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name="h",Parent = doom})
+local label = CreateInstance('TextLabel',{Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size24,Text=table.concat(list, "\n"),TextColor3=Color3.fromRGB(255,255,255),TextScaled=false,TextSize=23,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=Enum.TextXAlignment.Left,TextYAlignment=Enum.TextYAlignment.Top,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.025,0,0),Rotation=0,Selectable=false,Size=UDim2.new(0, 271, 0, 99999),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name="h",Parent = doom})
 end)
 
 
@@ -5001,7 +5001,7 @@ TopImage = "rbxassetid://148970562";
 Parent = window.Content;
 })
 
-local label = CreateInstance('TextLabel',{Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size24,Text= {prwefix} {table.concat(list, \n{prwefix} )},TextColor3=Color3.fromRGB(255,255,255),TextScaled=false,TextSize=23,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=Enum.TextXAlignment.Left,TextYAlignment=Enum.TextYAlignment.Top,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.025,0,0,0),Rotation=0,Selectable=false,Size=UDim2.new(0, 271, 0, 99999),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name="h",Parent = doom})
+local label = CreateInstance('TextLabel',{Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size24,Text=table.concat(list, "\n"),TextColor3=Color3.fromRGB(255,255,255),TextScaled=false,TextSize=23,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=Enum.TextXAlignment.Left,TextYAlignment=Enum.TextYAlignment.Top,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.025,0,0,0),Rotation=0,Selectable=false,Size=UDim2.new(0, 271, 0, 99999),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name="h",Parent = doom})
 
 end)
 
@@ -6397,7 +6397,7 @@ Parent = gui;
 })
 local IntroText2 = create('TextLabel',{
 Transparency = 1;
-Text = "Krunox V2.2.0";
+Text = "Krunox V2.2.1.9";
 TextSize = 42;
 TextColor3 = Color3.new(1,1,1);
 Font = Enum.Font.SourceSansLight;
