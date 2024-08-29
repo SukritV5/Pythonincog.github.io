@@ -81,8 +81,8 @@ end
 defaultsettings = {
 prefix = ':';
 autobackdoorscan = true;
-GuiSnappingK = true;
-GuiDraggingK = true;
+GuiSnappingK = false;
+GuiDraggingK = false;
 ToggleKeyCmd = 'BackSlash';
 KToggleKey = 'LeftControl';
 KeepWindowsOpen = false;
@@ -105,8 +105,8 @@ nosaves = false
 useFactorySettings = function()
 prefix = ':';
 autobackdoorscan = true;
-GuiSnappingK = true;
-GuiDraggingK = true;
+GuiSnappingK = false;
+GuiDraggingK = false;
 ToggleKeyCmd = 'BackSlash';
 KToggleKey = 'LeftControl';
 KeepWindowsOpen = false;
@@ -136,9 +136,9 @@ if json.prefix ~= nil then prefix = json.prefix else prefix = ':' end
 
 if json.autobackdoorscan ~= nil then autobackdoorscan = json.autobackdoorscan else autobackdoorscan = true end
 
-if json.GuiSnappingK ~= nil then GuiSnappingK = json.GuiSnappingK else GuiSnappingK = true end
+if json.GuiSnappingK ~= nil then GuiSnappingK = json.GuiSnappingK else GuiSnappingK = false end
 
-if json.GuiDraggingK ~= nil then GuiDraggingK = json.GuiDraggingK else GuiDraggingK = true end
+if json.GuiDraggingK ~= nil then GuiDraggingK = json.GuiDraggingK else GuiDraggingK = false end
 
 if json.ToggleKeyCmd ~= nil then ToggleKeyCmd = json.ToggleKeyCmd else ToggleKeyCmd = 'BackSlash' end
 
