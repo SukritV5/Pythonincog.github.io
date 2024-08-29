@@ -3498,7 +3498,7 @@ end
 
 local bodyAngularVelocity = Instance.new("BodyAngularVelocity", getRootp(LclPlayer.Character))
     bodyAngularVelocity.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
-    bodyAngularVelocity.P = 1000000000000000000000000000e1
+    bodyAngularVelocity.P = 1000000000000000000000000000
     bodyAngularVelocity.AngularVelocity = Vector3.new(10000, 10000, 10000)
 
 repeat task.wait()
@@ -3672,9 +3672,8 @@ end
 end
 
 AddCommand("deletep", function()
-deletep()
+deletepar()
 end)
-
 
 AddCommand("bringparts", function()
 for i,v in pairs(GetPlayer(args[2])) do
