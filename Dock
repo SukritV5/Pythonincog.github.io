@@ -3671,6 +3671,10 @@ ForceInstance.P = 1000000
 end
 end
 
+AddCommand("deletep", function()
+deletep()
+end)
+
 
 AddCommand("bringparts", function()
 for i,v in pairs(GetPlayer(args[2])) do
