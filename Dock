@@ -613,16 +613,16 @@ CMDBARKTB.TextWrapped = true
 CMDBARKTB.TextXAlignment = Enum.TextXAlignment.Left
 
 
-function create(obj, tbl)
-local nobj = Instance.new(obj)
-for i,v in pairs(tbl) do
-nobj[i] = v
+function createnew(object, tblhld)
+local newobj = Instance.new(object)
+for i,v in pairs(tblhld) do
+newobj[i] = v
 end
-return nobj
+return newobj
 end
 
 function createShadow(parent)
-return create('Frame', {
+return createnew('Frame', {
 Size = UDim2.new(1, 8, 1, 8);
 Position = UDim2.new(0, -4, 0, -4);
 Style = Enum.FrameStyle.DropShadow;
@@ -632,7 +632,7 @@ Parent = parent;
 end
 
 function createSmallShadow(parent)
-return create('Frame', {
+return createnew('Frame', {
 Size = UDim2.new(1, 6, 1, 6);
 Position = UDim2.new(0, -3, 0, -3);
 Style = Enum.FrameStyle.DropShadow;
@@ -664,7 +664,7 @@ return lst
 end
 
 function createIcon(ic, prop, clik)
-local nic = create(clik and 'ImageButton' or 'ImageLabel', {
+local nic = createnew(clik and 'ImageButton' or 'ImageLabel', {
 Image = ic;
 BackgroundTransparency = 1;
 })
@@ -826,7 +826,7 @@ end
 
 -- << Blur >> --
 
-local blurEffect = create('BlurEffect', {
+local blurEffect = createnew('BlurEffect', {
 Parent = workspace.CurrentCamera;
 Size = 0;
 })
@@ -840,11 +840,11 @@ end)
 
 -- << Create GUI >> --
 
-local gui = create('ScreenGui', {
+local gui = createnew('ScreenGui', {
 Parent = CoreGui; --services.plrgui;
 Name = 'KrunoxBeta';
 })
-local pingui = create('ScreenGui',{
+local pingui = createnew('ScreenGui',{
 Parent = CoreGui;
 Name = 'KrunoxBeta';
 })
@@ -907,7 +907,7 @@ return rect
 end
 
 function makePsuedoBorder(g,length)
-local top = create('Frame',{
+local top = createnew('Frame',{
 ZIndex = g.ZIndex;
 Size = UDim2.new(1,length,0,length);
 Position = UDim2.new(0,0,0,-length);
@@ -915,7 +915,7 @@ BackgroundColor3 = Color3.fromRGB(255,255,255);
 BorderSizePixel = 0;
 Parent = g;
 })
-local bottom = create('Frame',{
+local bottom = createnew('Frame',{
 ZIndex = g.ZIndex;
 Size = UDim2.new(1,length,0,length);
 Position = UDim2.new(0,-length,1,0);
@@ -923,7 +923,7 @@ BackgroundColor3 = Color3.fromRGB(255,255,255);
 BorderSizePixel = 0;
 Parent = g;
 })
-local left = create('Frame',{
+local left = createnew('Frame',{
 ZIndex = g.ZIndex;
 Size = UDim2.new(0,length,1,length);
 Position = UDim2.new(0,-length,0,-length);
@@ -931,7 +931,7 @@ BackgroundColor3 = Color3.fromRGB(255,255,255);
 BorderSizePixel = 0;
 Parent = g;
 })
-local right = create('Frame',{
+local right = createnew('Frame',{
 ZIndex = g.ZIndex;
 Size = UDim2.new(0,length,1,length);
 Position = UDim2.new(1,0,0,0);
@@ -978,7 +978,7 @@ end
 
 
 
-local tabHolder = create('Frame', {
+local tabHolder = createnew('Frame', {
 Name = "FathomController";
 Size = UDim2.new(0, 0, 0, #TABS * 35);
 Position = UDim2.new(0, 10, .5, 0);
@@ -999,7 +999,7 @@ end
 end
 -- applied color stuff 
 -- << End of checker >> --
-local newWindow = create('Frame', {
+local newWindow = createnew('Frame', {
 Size = UDim2.new(0, properties.width - 50, 0, properties.height - 50);
 ZIndex = 8;
 BorderSizePixel = 0;
@@ -1014,7 +1014,7 @@ Parent = gui;
 newWindow.Position = (properties.position or UDim2.new(.5, -(newWindow.AbsoluteSize.X/2)+(#gui:children()-1)*30, .5, -(newWindow.AbsoluteSize.Y/2)+(#gui:children()-1)*30)) + UDim2.new(0, 25, 0, 25);
 local nshad = createShadow(newWindow)
 nshad.Visible = false
-local top = create('TextButton', {
+local top = createnew('TextButton', {
 Name = "Drag";
 Size = UDim2.new(1, 0, 0, 30);
 Position = UDim2.new(0, 31, 0, 0);
@@ -1028,7 +1028,7 @@ TextColor3 = Color3.fromRGB(255,255,255);
 ZIndex = 8;
 Parent = newWindow;
 })
-local content = create('Frame',{
+local content = createnew('Frame',{
 Name = "Content";
 ZIndex = 8;
 Size = UDim2.new(1, 0, 0, properties.height - 30);
@@ -1244,7 +1244,7 @@ end
 local atbts = {}
 
 for i,v in pairs(TABS) do
-local nbt = create('TextButton', {
+local nbt = createnew('TextButton', {
 Name = v.Name;
 Size = UDim2.new(0, 150, 0, 30);
 Position = UDim2.new(0, -165, 0, (i - 1) * 34.4);
@@ -1279,7 +1279,7 @@ ZIndex = 8;
 Parent = nbt;
 })
 
-local ntx = create('TextLabel', {
+local ntx = createnew('TextLabel', {
 BackgroundTransparency = 1;
 Size = UDim2.new(1, 0, 1, 0);
 Position = UDim2.new(0, 31, 0, 0);
@@ -1299,19 +1299,19 @@ end
 
 -- << Notify >> --
 
-local MsgContainer = create('Frame',{Style=Enum.FrameStyle.Custom,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.949999988, -420, 0, 0),Rotation=0,Selectable=false,Size=UDim2.new(0.0500000007, 420, 1, -20),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=1,Name = 'Container',Parent = gui})
-create('UIListLayout', {Padding = UDim.new(0, 15), FillDirection = Enum.FillDirection.Vertical, HorizontalAlignment = Enum.HorizontalAlignment.Center, SortOrder = Enum.SortOrder.LayoutOrder, VerticalAlignment = Enum.VerticalAlignment.Bottom, Name = 'UIListLayout', Parent = MsgContainer })
+local MsgContainer = createnew('Frame',{Style=Enum.FrameStyle.Custom,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.949999988, -420, 0, 0),Rotation=0,Selectable=false,Size=UDim2.new(0.0500000007, 420, 1, -20),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=1,Name = 'Container',Parent = gui})
+createnew('UIListLayout', {Padding = UDim.new(0, 15), FillDirection = Enum.FillDirection.Vertical, HorizontalAlignment = Enum.HorizontalAlignment.Center, SortOrder = Enum.SortOrder.LayoutOrder, VerticalAlignment = Enum.VerticalAlignment.Bottom, Name = 'UIListLayout', Parent = MsgContainer })
 
 function Notify(icon,title,subtitle,time)
 spawn(function()
 local parent = MsgContainer
 local closeactivate = false
-local Noti = create('Frame',{Style=Enum.FrameStyle.Custom,LayoutOrder=1,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0, 0, 0, 0),Rotation=0,Selectable=false,Size=UDim2.new(0, 390, 0, 0),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=60,Name = 'Noti',Parent = parent})
-local Shadow = create('ImageLabel',{Image='rbxassetid://186491278',ImageColor3=Color3.fromRGB(255,255,255),ImageRectOffset=Vector2.new(0, 0),ImageRectSize=Vector2.new(0, 0),ImageTransparency=1,ScaleType=Enum.ScaleType.Slice,SliceCenter=Rect.new(50, 50, 50, 50),Active=false,AnchorPoint=Vector2.new(0.5, 0.479999989),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0, 195, 0, 49),Rotation=0,Selectable=false,Size=UDim2.new(1, 31, 1, 32),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=59,Name='Shadow',Parent = Noti})
-local Close = create('ImageButton',{Image='rbxassetid://17366441490',ImageColor3=Color3.fromRGB(255,255,255),ImageRectOffset=Vector2.new(0, 0),ImageRectSize=Vector2.new(0, 0),ImageTransparency=1,ScaleType=Enum.ScaleType.Stretch,SliceCenter=Rect.new(0, 0, 0, 0),AutoButtonColor=true,Modal=false,Selected=false,Style=Enum.ButtonStyle.Custom,Active=true,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(1, -30, 0, 13),Rotation=0,Selectable=true,Size=UDim2.new(0, 15, 0, 15),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=63,Name='Close',Parent = Noti})
-local Icon = create('ImageLabel',{Image=icon[1],ImageColor3=Color3.new(0.533333, 0.65098, 0.658824),ImageRectOffset=Vector2.new(0, 0),ImageRectSize=Vector2.new(0, 0),ImageTransparency=1,ScaleType=Enum.ScaleType.Stretch,SliceCenter=Rect.new(0, 0, 0, 0),Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0, 18, 0, 14),Rotation=0,Selectable=false,Size=UDim2.new(0, 73, 0, 73),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=61,Name='Icon',Parent = Noti})
-local Subtitle = create('TextLabel',{Font=Enum.Font.SourceSans,FontSize=Enum.FontSize.Size24,Text=subtitle,TextColor3=Color3.fromRGB(0.239216, 0.239216, 0.239216),TextScaled=true,TextSize=19,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=1,TextWrapped=true,TextXAlignment=Enum.TextXAlignment.Left,TextYAlignment=Enum.TextYAlignment.Top,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0, 105, 0, 45),Rotation=0,Selectable=false,Size=UDim2.new(0, 270, 0, 17),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=62,Name='Subtitle',Parent = Noti})
-local Title = create('TextLabel',{Font=Enum.Font.SourceSansSemibold,FontSize=Enum.FontSize.Size24,Text=title,TextColor3=Color3.fromRGB(0.239216, 0.239216, 0.239216),TextScaled=true,TextSize=21,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=1,TextWrapped=true,TextXAlignment=Enum.TextXAlignment.Left,TextYAlignment=Enum.TextYAlignment.Bottom,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0, 105, 0, 10),Rotation=0,Selectable=false,Size=UDim2.new(0, 200, 0, 27),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=62,Name='Title',Parent = Noti})
+local Noti = createnew('Frame',{Style=Enum.FrameStyle.Custom,LayoutOrder=1,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0, 0, 0, 0),Rotation=0,Selectable=false,Size=UDim2.new(0, 390, 0, 0),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=60,Name = 'Noti',Parent = parent})
+local Shadow = createnew('ImageLabel',{Image='rbxassetid://186491278',ImageColor3=Color3.fromRGB(255,255,255),ImageRectOffset=Vector2.new(0, 0),ImageRectSize=Vector2.new(0, 0),ImageTransparency=1,ScaleType=Enum.ScaleType.Slice,SliceCenter=Rect.new(50, 50, 50, 50),Active=false,AnchorPoint=Vector2.new(0.5, 0.479999989),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0, 195, 0, 49),Rotation=0,Selectable=false,Size=UDim2.new(1, 31, 1, 32),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=59,Name='Shadow',Parent = Noti})
+local Close = createnew('ImageButton',{Image='rbxassetid://17366441490',ImageColor3=Color3.fromRGB(255,255,255),ImageRectOffset=Vector2.new(0, 0),ImageRectSize=Vector2.new(0, 0),ImageTransparency=1,ScaleType=Enum.ScaleType.Stretch,SliceCenter=Rect.new(0, 0, 0, 0),AutoButtonColor=true,Modal=false,Selected=false,Style=Enum.ButtonStyle.Custom,Active=true,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(1, -30, 0, 13),Rotation=0,Selectable=true,Size=UDim2.new(0, 15, 0, 15),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=63,Name='Close',Parent = Noti})
+local Icon = createnew('ImageLabel',{Image=icon[1],ImageColor3=Color3.new(0.533333, 0.65098, 0.658824),ImageRectOffset=Vector2.new(0, 0),ImageRectSize=Vector2.new(0, 0),ImageTransparency=1,ScaleType=Enum.ScaleType.Stretch,SliceCenter=Rect.new(0, 0, 0, 0),Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0, 18, 0, 14),Rotation=0,Selectable=false,Size=UDim2.new(0, 73, 0, 73),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=61,Name='Icon',Parent = Noti})
+local Subtitle = createnew('TextLabel',{Font=Enum.Font.SourceSans,FontSize=Enum.FontSize.Size24,Text=subtitle,TextColor3=Color3.fromRGB(0.239216, 0.239216, 0.239216),TextScaled=true,TextSize=19,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=1,TextWrapped=true,TextXAlignment=Enum.TextXAlignment.Left,TextYAlignment=Enum.TextYAlignment.Top,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0, 105, 0, 45),Rotation=0,Selectable=false,Size=UDim2.new(0, 270, 0, 17),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=62,Name='Subtitle',Parent = Noti})
+local Title = createnew('TextLabel',{Font=Enum.Font.SourceSansSemibold,FontSize=Enum.FontSize.Size24,Text=title,TextColor3=Color3.fromRGB(0.239216, 0.239216, 0.239216),TextScaled=true,TextSize=21,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=1,TextWrapped=true,TextXAlignment=Enum.TextXAlignment.Left,TextYAlignment=Enum.TextYAlignment.Bottom,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0, 105, 0, 10),Rotation=0,Selectable=false,Size=UDim2.new(0, 200, 0, 27),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=62,Name='Title',Parent = Noti})
 if icon[2] ~= nil then
 Icon.ImageColor3 = icon[2]
 end
@@ -1378,7 +1378,7 @@ end
 
 function toggleanim(parent,func)
 local pos = UDim2.new(0,parent.Size.X.Offset/2,0,parent.Size.Y.Offset/2)
-local circleanim = create('ImageLabel', {
+local circleanim = createnew('ImageLabel', {
 Name = "Circleanim";
 Size = UDim2.new(0, 0, 0, 0);
 BackgroundTransparency = 1;
@@ -1417,10 +1417,10 @@ end
 
 function createcheckbox(parent,oncolor,offcolor,respone_function,mode)
 local selectcolor = oncolor or Color3.fromRGB(0,0,0);local notselectedcolor = offcolor or Color3.fromRGB(255,255,255)
-local CheckBoxImage = create('ImageButton',{Image='rbxassetid://1721163816',ZIndex=65,ImageColor3=selectcolor,ImageRectOffset=Vector2.new(0, 0),ImageRectSize=Vector2.new(0, 0),ImageTransparency=0,ScaleType=Enum.ScaleType.Stretch,SliceCenter=Rect.new(0, 0, 0, 0),AutoButtonColor=true,Modal=false,Selected=false,Style=Enum.ButtonStyle.Custom,Active=true,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0, -35, 0, 0),Rotation=0,Selectable=true,Size=UDim2.new(0, 26, 0, 26),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,Name='CheckBoxImage',Parent = parent})
-local BackgroundFrame = create('Frame',{Style=Enum.FrameStyle.Custom,ZIndex=63,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=selectcolor,BackgroundTransparency=0,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.150000006, 0, 0.150000006, 0),Rotation=0,Selectable=false,Size=UDim2.new(0.699999988, 0, 0.699999988, 0),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,Name = 'BackgroundFrame',Parent = CheckBoxImage})
-local CheckFrame = create('Frame',{Style=Enum.FrameStyle.Custom,ZIndex=64,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=notselectedcolor,BackgroundTransparency=0,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0, 4, 0, 5),Rotation=0,Selectable=false,Size=UDim2.new(0, 0, 0.600000024, 0),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,Name = 'CheckFrame',Parent = CheckBoxImage})
-local UncheckedFrame = create('Frame',{Style=Enum.FrameStyle.Custom,ZIndex=65,Active=false,AnchorPoint=Vector2.new(0.5, 0.5),BackgroundColor3=notselectedcolor,BackgroundTransparency=0,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.5, 0, 0.5, 0),Rotation=0,Selectable=false,Size=UDim2.new(0.600000024, 0, 0.600000024, 0),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,Name = 'UncheckedFrame',Parent = CheckBoxImage})
+local CheckBoxImage = createnew('ImageButton',{Image='rbxassetid://1721163816',ZIndex=65,ImageColor3=selectcolor,ImageRectOffset=Vector2.new(0, 0),ImageRectSize=Vector2.new(0, 0),ImageTransparency=0,ScaleType=Enum.ScaleType.Stretch,SliceCenter=Rect.new(0, 0, 0, 0),AutoButtonColor=true,Modal=false,Selected=false,Style=Enum.ButtonStyle.Custom,Active=true,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0, -35, 0, 0),Rotation=0,Selectable=true,Size=UDim2.new(0, 26, 0, 26),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,Name='CheckBoxImage',Parent = parent})
+local BackgroundFrame = createnew('Frame',{Style=Enum.FrameStyle.Custom,ZIndex=63,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=selectcolor,BackgroundTransparency=0,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.150000006, 0, 0.150000006, 0),Rotation=0,Selectable=false,Size=UDim2.new(0.699999988, 0, 0.699999988, 0),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,Name = 'BackgroundFrame',Parent = CheckBoxImage})
+local CheckFrame = createnew('Frame',{Style=Enum.FrameStyle.Custom,ZIndex=64,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=notselectedcolor,BackgroundTransparency=0,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0, 4, 0, 5),Rotation=0,Selectable=false,Size=UDim2.new(0, 0, 0.600000024, 0),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,Name = 'CheckFrame',Parent = CheckBoxImage})
+local UncheckedFrame = createnew('Frame',{Style=Enum.FrameStyle.Custom,ZIndex=65,Active=false,AnchorPoint=Vector2.new(0.5, 0.5),BackgroundColor3=notselectedcolor,BackgroundTransparency=0,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.5, 0, 0.5, 0),Rotation=0,Selectable=false,Size=UDim2.new(0.600000024, 0, 0.600000024, 0),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,Name = 'UncheckedFrame',Parent = CheckBoxImage})
 local checked = false
 if mode == true then
 checked = true
@@ -1653,7 +1653,7 @@ loaderbarc:TweenPosition(UDim2.new(-0.19,0, -0.262762755,0),Enum.EasingDirection
 function opensettings()
 
 local windo = Window.new({width = 250, height = 300, name='Settings', icon='rbxassetid://898100298'})
-local colorButton = create('TextButton',{
+local colorButton = createnew('TextButton',{
 ZIndex = 8;
 Text = "Set Window Color";
 Font = Enum.Font.SourceSansLight;
@@ -1671,7 +1671,7 @@ ZIndex = 8;
 Parent = colorButton;
 })
 icon.Size = UDim2.new(0,icon.AbsoluteSize.Y,0,icon.AbsoluteSize.Y)
-local keyboardButton = create('TextButton',{
+local keyboardButton = createnew('TextButton',{
 ZIndex = 8;
 Text = "Set Keybind";
 TextScaled = true;
@@ -1689,7 +1689,7 @@ ZIndex = 8;
 Parent = keyboardButton;
 })
 icon2.Size = UDim2.new(0,icon2.AbsoluteSize.Y,0,icon2.AbsoluteSize.Y)
-local blurButton = create('TextButton',{
+local blurButton = createnew('TextButton',{
 Font = Enum.Font.SourceSansLight;
 ZIndex = 8;
 Text = "Set Blur Level";
@@ -1708,7 +1708,7 @@ Parent = blurButton;
 })
 icon3.Size = UDim2.new(0,icon3.AbsoluteSize.Y,0,icon3.AbsoluteSize.Y)
 
-local Morebtn = create('TextButton',{
+local Morebtn = createnew('TextButton',{
 Font = Enum.Font.SourceSansLight;
 ZIndex = 8;
 Text = "More";
@@ -1728,7 +1728,7 @@ Parent = Morebtn;
 icon4.Size = UDim2.new(0,icon3.AbsoluteSize.Y,0,icon3.AbsoluteSize.Y)
 
 
-local setcmdkey = create('TextButton',{
+local setcmdkey = createnew('TextButton',{
 Font = Enum.Font.SourceSansLight;
 ZIndex = 8;
 Text = "Set CmdBar Keybind";
@@ -1747,7 +1747,7 @@ Parent = setcmdkey;
 })
 icon5.Size = UDim2.new(0,icon3.AbsoluteSize.Y,0,icon3.AbsoluteSize.Y)
 
-local setcmdp = create('TextButton',{
+local setcmdp = createnew('TextButton',{
 Font = Enum.Font.SourceSansLight;
 ZIndex = 8;
 Text = "Set Command Prefix";
@@ -1768,7 +1768,7 @@ icon6.Size = UDim2.new(0,icon3.AbsoluteSize.Y,0,icon3.AbsoluteSize.Y)
 
 setcmdp.MouseButton1Down:connect(function()
 local window = Window.new({width = 165, height = 100, name='Set Prefix', icon='rbxassetid://17382166939'})
-local pLabel = create('TextLabel',{
+local pLabel = createnew('TextLabel',{
 ZIndex = 8;
 Text = "Prefix";
 TextScaled = true;
@@ -1779,7 +1779,7 @@ Size = UDim2.new(0,60,0,60);
 Position = UDim2.new(0.45,-60,0.05,0);
 Parent = window.Content;
 })
-local preBox  = create('TextBox',{
+local preBox  = createnew('TextBox',{
 ZIndex = 8;
 Text = tostring(prefix);
 ClearTextOnFocus = false;
@@ -1805,7 +1805,7 @@ end)
 setcmdkey.MouseButton1Click:Connect(function()
 
 local window = Window.new({width = 165, height = 100, name='Set Cmd Key', icon='rbxassetid://17382166939'})
-local changebtn = create('TextButton',{
+local changebtn = createnew('TextButton',{
 ZIndex = 8;
 Text = "Set Keybind";
 Size = UDim2.new(.45,0,.6,0);
@@ -1817,7 +1817,7 @@ Font = Enum.Font.SourceSansLight;
 TextScaled = true;
 Parent = window.Content;
 })
-local crtbtn = create('TextLabel',{
+local crtbtn = createnew('TextLabel',{
 ZIndex = 8;
 Text = tostring(barbindd[1][1]):sub(14);
 Size = UDim2.new(.45,0,.6,0);
@@ -1849,7 +1849,7 @@ end)
 
 blurButton.MouseButton1Down:connect(function()
 local window = Window.new({width = 165, height = 100, name='Set Blur', icon='rbxassetid://951352122'})
-local blurLabel = create('TextLabel',{
+local blurLabel = createnew('TextLabel',{
 ZIndex = 8;
 Text = "Blur Level";
 TextScaled = true;
@@ -1860,7 +1860,7 @@ Size = UDim2.new(0,60,0,60);
 Position = UDim2.new(0.45,-60,0.05,0);
 Parent = window.Content;
 })
-local blurBox  = create('TextBox',{
+local blurBox  = createnew('TextBox',{
 ZIndex = 8;
 Text = tostring(blurLevel);
 ClearTextOnFocus = false;
@@ -1966,7 +1966,7 @@ end)
 keyboardButton.MouseButton1Down:connect(function()
 
 local window = Window.new({width = 165, height = 100, name='Set Key', icon='rbxassetid://950538977'})
-local changeButton = create('TextButton',{
+local changeButton = createnew('TextButton',{
 ZIndex = 8;
 Text = "Set Keybind";
 Size = UDim2.new(.45,0,.6,0);
@@ -1978,7 +1978,7 @@ Font = Enum.Font.SourceSansLight;
 TextScaled = true;
 Parent = window.Content;
 })
-local currentButton = create('TextLabel',{
+local currentButton = createnew('TextLabel',{
 ZIndex = 8;
 Text = tostring(binds[1][1]):sub(14);
 Size = UDim2.new(.45,0,.6,0);
@@ -2012,7 +2012,7 @@ end)
 
 colorButton.MouseButton1Click:Connect(function()
 local window = Window.new({width = 165, height = 310, name='Set Color', icon='rbxassetid://904628594'})
-local clrLabel1 = create('TextLabel',{
+local clrLabel1 = createnew('TextLabel',{
 ZIndex = 8;
 Text = "R";
 TextScaled = true;
@@ -2026,7 +2026,7 @@ Parent = window.Content;
 
 
 
-local clrLabel2 = create('TextLabel',{
+local clrLabel2 = createnew('TextLabel',{
 ZIndex = 8;
 Text = "G";
 TextScaled = true;
@@ -2039,7 +2039,7 @@ Parent = window.Content;
 })
 
 
-local clrLabel3 = create('TextLabel',{
+local clrLabel3 = createnew('TextLabel',{
 ZIndex = 8;
 Text = "B";
 TextScaled = true;
@@ -2051,7 +2051,7 @@ Position = UDim2.new(0.45,-60,0.54,0);
 Parent = window.Content;
 })
 
-local redbox  = create('TextBox',{
+local redbox  = createnew('TextBox',{
 ZIndex = 8;
 Text = tostring(MCRED);
 ClearTextOnFocus = false;
@@ -2069,7 +2069,7 @@ redbox.Text = redbox.Text:gsub("%D","")
 end)
 
 
-local greenbox  = create('TextBox',{
+local greenbox  = createnew('TextBox',{
 ZIndex = 8;
 Text = tostring(MCGREEN);
 ClearTextOnFocus = false;
@@ -2087,7 +2087,7 @@ greenbox.Text = greenbox.Text:gsub("%D","")
 end)
 
 
-local bluebox  = create('TextBox',{
+local bluebox  = createnew('TextBox',{
 ZIndex = 8;
 Text = tostring(MCBLUE);
 ClearTextOnFocus = false;
@@ -4244,7 +4244,7 @@ AddCommand("cmds", function()
 local window = Window.new({width = 390, height = 303, name='Commands List', icon='rbxassetid://14541577418'})
 
 
-local doom = create('ScrollingFrame',{
+local doom = createnew('ScrollingFrame',{
 ZIndex = 8;
 ClipsDescendants = false;
 BackgroundTransparency = 1;
@@ -4270,7 +4270,7 @@ end
 local window = Window.new({width = 390, height = 303, name='UNC Test'})
 
 
-local scframeunc = create('ScrollingFrame',{
+local scframeunc = createnew('ScrollingFrame',{
 ZIndex = 8;
 ClipsDescendants = false;
 BackgroundTransparency = 1;
@@ -5178,11 +5178,11 @@ function joinlogsstart()
 
 local window = Window.new({width = 390, height = 303, name='Join logs', icon='rbxassetid://70935639316572'})
 
-local doom = create('ScrollingFrame',{BottomImage='rbxasset://textures/ui/Scroll/scroll-middle.png', ScrollBarImageTransparency=0.7,CanvasPosition=Vector2.new(0, 0),CanvasSize=UDim2.new(0, 0, 10, 0),MidImage='rbxasset://textures/ui/Scroll/scroll-middle.png',ScrollBarThickness=6,ScrollingEnabled=true,TopImage='rbxasset://textures/ui/Scroll/scroll-middle.png',Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=true,Draggable=false,Position=UDim2.new(0.025, 0, 0, 0),Rotation=0,Selectable=true,Size=UDim2.new(1, 0, 0, 600),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='chat',Parent = window.Content})
+local doom = createnew('ScrollingFrame',{BottomImage='rbxasset://textures/ui/Scroll/scroll-middle.png', ScrollBarImageTransparency=0.7,CanvasPosition=Vector2.new(0, 0),CanvasSize=UDim2.new(0, 0, 10, 0),MidImage='rbxasset://textures/ui/Scroll/scroll-middle.png',ScrollBarThickness=6,ScrollingEnabled=true,TopImage='rbxasset://textures/ui/Scroll/scroll-middle.png',Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=true,Draggable=false,Position=UDim2.new(0.025, 0, 0, 0),Rotation=0,Selectable=true,Size=UDim2.new(1, 0, 0, 600),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='chat',Parent = window.Content})
 
 clogen = true
 
-local onoffbtn = create('TextButton',{
+local onoffbtn = createnew('TextButton',{
 Font = Enum.Font.SourceSansLight;
 ZIndex = 8;
 Text = "Enabled";
@@ -5195,7 +5195,7 @@ Position = UDim2.new(0.025,0,0,240);
 Parent = window.Content;
 })
 
-local exportfile = create('TextButton',{
+local exportfile = createnew('TextButton',{
 Font = Enum.Font.SourceSansLight;
 ZIndex = 8;
 Text = "Export to TXT File";
@@ -5301,11 +5301,11 @@ function chatlogsstart()
 
 local window = Window.new({width = 390, height = 303, name='Chat logs', icon='rbxassetid://109927161647811'})
 
-local doomw = create('ScrollingFrame',{BottomImage='rbxasset://textures/ui/Scroll/scroll-middle.png', ScrollBarImageTransparency=0.7,CanvasPosition=Vector2.new(0, 0),CanvasSize=UDim2.new(0, 0, 10, 0),MidImage='rbxasset://textures/ui/Scroll/scroll-middle.png',ScrollBarThickness=6,ScrollingEnabled=true,TopImage='rbxasset://textures/ui/Scroll/scroll-middle.png',Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=true,Draggable=false,Position=UDim2.new(0.025, 0, 0, 0),Rotation=0,Selectable=true,Size=UDim2.new(1, 0, 0, 600),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='chat',Parent = window.Content})
+local doomw = createnew('ScrollingFrame',{BottomImage='rbxasset://textures/ui/Scroll/scroll-middle.png', ScrollBarImageTransparency=0.7,CanvasPosition=Vector2.new(0, 0),CanvasSize=UDim2.new(0, 0, 10, 0),MidImage='rbxasset://textures/ui/Scroll/scroll-middle.png',ScrollBarThickness=6,ScrollingEnabled=true,TopImage='rbxasset://textures/ui/Scroll/scroll-middle.png',Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=true,Draggable=false,Position=UDim2.new(0.025, 0, 0, 0),Rotation=0,Selectable=true,Size=UDim2.new(1, 0, 0, 600),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='chat',Parent = window.Content})
 
 clogenw = true
 
-local onoffbtnw = create('TextButton',{
+local onoffbtnw = createnew('TextButton',{
 Font = Enum.Font.SourceSansLight;
 ZIndex = 8;
 Text = "Enabled";
@@ -5318,7 +5318,7 @@ Position = UDim2.new(0.025,0,0,240);
 Parent = window.Content;
 })
 
-local exportfilew = create('TextButton',{
+local exportfilew = createnew('TextButton',{
 Font = Enum.Font.SourceSansLight;
 ZIndex = 8;
 Text = "Export to TXT File";
@@ -5663,7 +5663,7 @@ end
 tabHolder.Browser.MouseButton1Click:Connect(function()
 
 local windo = Window.new({width = 250, height = 300, name='Browser', icon='rbxassetid://14520720759'})
-local Browsing = create('TextButton',{
+local Browsing = createnew('TextButton',{
 ZIndex = 8;
 Text = "Pastebin Engine";
 Font = Enum.Font.SourceSansLight;
@@ -5681,7 +5681,7 @@ ZIndex = 8;
 Parent = Browsing;
 })
 icon.Size = UDim2.new(0,icon.AbsoluteSize.Y,0,icon.AbsoluteSize.Y)
-local BrowsingTwo = create('TextButton',{
+local BrowsingTwo = createnew('TextButton',{
 ZIndex = 8;
 Text = "Scriptblox Engine";
 TextScaled = true;
@@ -5703,7 +5703,7 @@ icon2.Size = UDim2.new(0,icon2.AbsoluteSize.Y,0,icon2.AbsoluteSize.Y)
 
 
 
-local BrowsingThree = create('TextButton',{
+local BrowsingThree = createnew('TextButton',{
 ZIndex = 8;
 Text = "Search Script for current game";
 TextScaled = true;
@@ -5733,28 +5733,28 @@ local window = Window.new({width = 300, height = 350, name='Krunox Browser', ico
 local Content = window.Content
 
 -- << Instances >> --
-local Search = create('TextBox',{ClearTextOnFocus=true,Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size24,MultiLine=false,Text='Search Online',TextColor3=Color3.fromRGB(255,255,255), PlaceholderText='', PlaceholderColor3=Color3.fromRGB(0.7, 0.7, 0.7),TextScaled=false,TextSize=22,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=true,TextXAlignment=Enum.TextXAlignment.Center,TextYAlignment=Enum.TextYAlignment.Bottom,Active=true,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.025, 0, 0, 0),Rotation=0,Selectable=true,Size=UDim2.new(0.95, 0,0.1, 0),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Search',Parent = Content})
-local ScriptsHolder = create('ScrollingFrame',{BottomImage='rbxasset://textures/ui/Scroll/scroll-middle.png', ScrollBarImageTransparency=0.7,CanvasPosition=Vector2.new(0, 0),CanvasSize=UDim2.new(0, 0, 2, 0),MidImage='rbxasset://textures/ui/Scroll/scroll-middle.png',ScrollBarThickness=6,ScrollingEnabled=true,TopImage='rbxasset://textures/ui/Scroll/scroll-middle.png',Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=true,Draggable=false,Position=UDim2.new(0, 0, 0.137500003, 0),Rotation=0,Selectable=true,Size=UDim2.new(1, 0, 0.862500012, 0),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='ScriptsHolder',Parent = Content})
-local ScriptExecutor = create('Frame',{Style=Enum.FrameStyle.Custom,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=0,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.0500000007, 0, 0.0425330997, 0),Rotation=0,Selectable=false,Size=UDim2.new(0, 270, 0, 81),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name = 'ScriptExecutor',Parent = ScriptsHolder})
-local Title = create('TextLabel',{Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size18,Text='execute gay script',TextColor3=Color3.new(0.00392157, 0.00392157, 0.00392157),TextScaled=false,TextSize=16,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=true,TextXAlignment=Enum.TextXAlignment.Center,TextYAlignment=Enum.TextYAlignment.Center,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.0481481478, 0, 0.0800001323, 0),Rotation=0,Selectable=false,Size=UDim2.new(0, 243, 0, 38),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Title',Parent = ScriptExecutor})
-local Execute = create('TextButton',{Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size18,Text='Execute',TextColor3=Color3.new(0.00392157, 0.00392157, 0.00392157),TextScaled=false,TextSize=17,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=Enum.TextXAlignment.Center,TextYAlignment=Enum.TextYAlignment.Center,AutoButtonColor=true,Modal=false,Selected=false,Style=Enum.ButtonStyle.Custom,Active=true,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(0.552941, 0.552941, 0.552941),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.0439999998, 0, 1, -33),Rotation=0,Selectable=true,Size=UDim2.new(0, 151, 0, 31),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Execute',Parent = ScriptExecutor})
-local More = create('TextButton',{Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size18,Text='More Options',TextColor3=Color3.new(0.00392157, 0.00392157, 0.00392157),TextScaled=false,TextSize=17,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=Enum.TextXAlignment.Center,TextYAlignment=Enum.TextYAlignment.Center,AutoButtonColor=true,Modal=false,Selected=false,Style=Enum.ButtonStyle.Custom,Active=true,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(0.282353, 0.282353, 0.282353),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.637000024, 0, 1, -33),Rotation=0,Selectable=true,Size=UDim2.new(0, 86, 0, 31),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='More',Parent = ScriptExecutor})
-local Sensor = create('Frame',{Style=Enum.FrameStyle.Custom,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=false,Draggable=false,Position=UDim2.new(1, -22, 0.137999997, 0),Rotation=0,Selectable=false,Size=UDim2.new(-0.260000199, 100, 0.863000035, 0),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name = 'Sensor',Parent = Content})
-local Buffer = create('Frame',{Style=Enum.FrameStyle.Custom,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0, 0, 0.137999997, 0),Rotation=0,Selectable=false,Size=UDim2.new(1, 0, 0.862999976, 0),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name = 'Buffer',Parent = Content})
-local UIListLayout = create('UIListLayout', {Padding = UDim.new(0, 0), FillDirection = Enum.FillDirection.Vertical, HorizontalAlignment = Enum.HorizontalAlignment.Center, SortOrder = Enum.SortOrder.LayoutOrder, VerticalAlignment = Enum.VerticalAlignment.Center, Name = 'UIListLayout', Parent = Buffer })
-local Settings = create('Frame',{Style=Enum.FrameStyle.Custom,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=0,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0, 0, 1, 0),Rotation=0,Selectable=false,Size=UDim2.new(1, 0, 1, 0),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name = 'Settings',Parent = Content})
-local Title = create('TextLabel',{Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size28,Text='Engine Customizations',TextColor3=Color3.fromRGB(0, 0, 0),TextScaled=false,TextSize=26,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=Enum.TextXAlignment.Center,TextYAlignment=Enum.TextYAlignment.Center,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.166666672, 0, 0.0249999985, 0),Rotation=0,Selectable=false,Size=UDim2.new(0, 200, 0, 36),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Title',Parent = Settings})
-local Ecosia = create('TextButton',{Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size24,Text='Ecosia',TextColor3=Color3.fromRGB(0, 0, 0),TextScaled=false,TextSize=20,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=Enum.TextXAlignment.Left,TextYAlignment=Enum.TextYAlignment.Center,AutoButtonColor=true,Modal=false,Selected=false,Style=Enum.ButtonStyle.Custom,Active=true,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.196666658, 0, 0.199184805, 0),Rotation=0,Selectable=true,Size=UDim2.new(0, 181, 0, 26),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Ecosia',Parent = Settings})
-local Google = create('TextButton',{Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size24,Text='Google',TextColor3=Color3.fromRGB(0, 0, 0),TextScaled=false,TextSize=20,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=Enum.TextXAlignment.Left,TextYAlignment=Enum.TextYAlignment.Center,AutoButtonColor=true,Modal=false,Selected=false,Style=Enum.ButtonStyle.Custom,Active=true,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.196666658, 0, 0.311684787, 0),Rotation=0,Selectable=true,Size=UDim2.new(0, 181, 0, 26),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Google',Parent = Settings})
-local Bing = create('TextButton',{Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size24,Text='Bing',TextColor3=Color3.fromRGB(0, 0, 0),TextScaled=false,TextSize=20,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=Enum.TextXAlignment.Left,TextYAlignment=Enum.TextYAlignment.Center,AutoButtonColor=true,Modal=false,Selected=false,Style=Enum.ButtonStyle.Custom,Active=true,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.196999997, 0, 0, 135),Rotation=0,Selectable=true,Size=UDim2.new(0, 181, 0, 26),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Bing',Parent = Settings})
-local TextLabel = create('TextLabel',{Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size14,Text='Powered by Peta',TextColor3=Color3.fromRGB(0.729412, 0.729412, 0.729412),TextScaled=false,TextSize=14,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=Enum.TextXAlignment.Left,TextYAlignment=Enum.TextYAlignment.Center,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.00999999978, 0, 0.950703025, 0),Rotation=0,Selectable=false,Size=UDim2.new(0, 59, 0, 15),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='TextLabel',Parent = Settings})
-local MetaInfo = create('Frame',{Style=Enum.FrameStyle.Custom,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=0,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0, 0, 1, 0),Rotation=0,Selectable=false,Size=UDim2.new(1, 0, 1, 0),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name = 'MetaInfo',Parent = Content})
-local MetaTitle = create('TextLabel',{Font=Enum.Font.SourceSansLight,TextSize=23,Text='Script Name Here',TextColor3=Color3.new(0.00392157, 0.00392157, 0.00392157),TextScaled=false,TextSize=25,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=true,TextXAlignment=Enum.TextXAlignment.Center,TextYAlignment=Enum.TextYAlignment.Top,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=0,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.0266666673, 0, 0.046875, 0),Rotation=0,Selectable=false,Size=UDim2.new(0, 282, 0, 84),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Title',Parent = MetaInfo})
-local Add = create('TextButton',{Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size24,Text='Add to Library',TextColor3=Color3.new(0.00392157, 0.00392157, 0.00392157),TextScaled=false,TextSize=20,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=Enum.TextXAlignment.Center,TextYAlignment=Enum.TextYAlignment.Center,AutoButtonColor=true,Modal=false,Selected=false,Style=Enum.ButtonStyle.Custom,Active=true,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=0,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.166666672, 0, 0.340624988, 0),Rotation=0,Selectable=true,Size=UDim2.new(0, 200, 0, 41),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Add',Parent = MetaInfo})
-create('ImageLabel',{Image='rbxassetid://728745585',ImageColor3=Color3.new(0.00392157, 0.00392157, 0.00392157),ImageRectOffset=Vector2.new(0, 0),ImageRectSize=Vector2.new(0, 0),ImageTransparency=0,ScaleType=Enum.ScaleType.Stretch,SliceCenter=Rect.new(0, 0, 0, 0),Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0, 5, 0.0979999974, 0),Rotation=0,Selectable=false,Size=UDim2.new(0, 33, 0, 33),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='ICN',Parent = Add})
-local Download = create('TextButton',{Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size24,Text='Download',TextColor3=Color3.new(0.00392157, 0.00392157, 0.00392157),TextScaled=false,TextSize=20,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=Enum.TextXAlignment.Center,TextYAlignment=Enum.TextYAlignment.Center,AutoButtonColor=true,Modal=false,Selected=false,Style=Enum.ButtonStyle.Custom,Active=true,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=0,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.166666672, 0, 0.484375, 0),Rotation=0,Selectable=true,Size=UDim2.new(0, 200, 0, 41),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Download',Parent = MetaInfo})
-create('ImageLabel',{Image='rbxassetid://1669787447',ImageColor3=Color3.new(0.00392157, 0.00392157, 0.00392157),ImageRectOffset=Vector2.new(0, 0),ImageRectSize=Vector2.new(0, 0),ImageTransparency=0,ScaleType=Enum.ScaleType.Stretch,SliceCenter=Rect.new(0, 0, 0, 0),Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0, 5, 0.0979999974, 0),Rotation=0,Selectable=false,Size=UDim2.new(0, 33, 0, 33),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='ICN',Parent = Download})
-local Close = create('TextButton',{Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size24,Text='Close',TextColor3=Color3.new(0.00392157, 0.00392157, 0.00392157),TextScaled=false,TextSize=20,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=Enum.TextXAlignment.Center,TextYAlignment=Enum.TextYAlignment.Center,AutoButtonColor=true,Modal=false,Selected=false,Style=Enum.ButtonStyle.Custom,Active=true,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=0,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.166999996, 0, 0.634000003, -1),Rotation=0,Selectable=true,Size=UDim2.new(0, 200, 0, 41),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Close',Parent = MetaInfo})
+local Search = createnew('TextBox',{ClearTextOnFocus=true,Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size24,MultiLine=false,Text='Search Online',TextColor3=Color3.fromRGB(255,255,255), PlaceholderText='', PlaceholderColor3=Color3.fromRGB(0.7, 0.7, 0.7),TextScaled=false,TextSize=22,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=true,TextXAlignment=Enum.TextXAlignment.Center,TextYAlignment=Enum.TextYAlignment.Bottom,Active=true,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.025, 0, 0, 0),Rotation=0,Selectable=true,Size=UDim2.new(0.95, 0,0.1, 0),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Search',Parent = Content})
+local ScriptsHolder = createnew('ScrollingFrame',{BottomImage='rbxasset://textures/ui/Scroll/scroll-middle.png', ScrollBarImageTransparency=0.7,CanvasPosition=Vector2.new(0, 0),CanvasSize=UDim2.new(0, 0, 2, 0),MidImage='rbxasset://textures/ui/Scroll/scroll-middle.png',ScrollBarThickness=6,ScrollingEnabled=true,TopImage='rbxasset://textures/ui/Scroll/scroll-middle.png',Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=true,Draggable=false,Position=UDim2.new(0, 0, 0.137500003, 0),Rotation=0,Selectable=true,Size=UDim2.new(1, 0, 0.862500012, 0),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='ScriptsHolder',Parent = Content})
+local ScriptExecutor = createnew('Frame',{Style=Enum.FrameStyle.Custom,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=0,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.0500000007, 0, 0.0425330997, 0),Rotation=0,Selectable=false,Size=UDim2.new(0, 270, 0, 81),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name = 'ScriptExecutor',Parent = ScriptsHolder})
+local Title = createnew('TextLabel',{Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size18,Text='execute gay script',TextColor3=Color3.new(0.00392157, 0.00392157, 0.00392157),TextScaled=false,TextSize=16,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=true,TextXAlignment=Enum.TextXAlignment.Center,TextYAlignment=Enum.TextYAlignment.Center,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.0481481478, 0, 0.0800001323, 0),Rotation=0,Selectable=false,Size=UDim2.new(0, 243, 0, 38),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Title',Parent = ScriptExecutor})
+local Execute = createnew('TextButton',{Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size18,Text='Execute',TextColor3=Color3.new(0.00392157, 0.00392157, 0.00392157),TextScaled=false,TextSize=17,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=Enum.TextXAlignment.Center,TextYAlignment=Enum.TextYAlignment.Center,AutoButtonColor=true,Modal=false,Selected=false,Style=Enum.ButtonStyle.Custom,Active=true,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(0.552941, 0.552941, 0.552941),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.0439999998, 0, 1, -33),Rotation=0,Selectable=true,Size=UDim2.new(0, 151, 0, 31),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Execute',Parent = ScriptExecutor})
+local More = createnew('TextButton',{Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size18,Text='More Options',TextColor3=Color3.new(0.00392157, 0.00392157, 0.00392157),TextScaled=false,TextSize=17,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=Enum.TextXAlignment.Center,TextYAlignment=Enum.TextYAlignment.Center,AutoButtonColor=true,Modal=false,Selected=false,Style=Enum.ButtonStyle.Custom,Active=true,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(0.282353, 0.282353, 0.282353),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.637000024, 0, 1, -33),Rotation=0,Selectable=true,Size=UDim2.new(0, 86, 0, 31),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='More',Parent = ScriptExecutor})
+local Sensor = createnew('Frame',{Style=Enum.FrameStyle.Custom,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=false,Draggable=false,Position=UDim2.new(1, -22, 0.137999997, 0),Rotation=0,Selectable=false,Size=UDim2.new(-0.260000199, 100, 0.863000035, 0),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name = 'Sensor',Parent = Content})
+local Buffer = createnew('Frame',{Style=Enum.FrameStyle.Custom,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0, 0, 0.137999997, 0),Rotation=0,Selectable=false,Size=UDim2.new(1, 0, 0.862999976, 0),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name = 'Buffer',Parent = Content})
+local UIListLayout = createnew('UIListLayout', {Padding = UDim.new(0, 0), FillDirection = Enum.FillDirection.Vertical, HorizontalAlignment = Enum.HorizontalAlignment.Center, SortOrder = Enum.SortOrder.LayoutOrder, VerticalAlignment = Enum.VerticalAlignment.Center, Name = 'UIListLayout', Parent = Buffer })
+local Settings = createnew('Frame',{Style=Enum.FrameStyle.Custom,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=0,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0, 0, 1, 0),Rotation=0,Selectable=false,Size=UDim2.new(1, 0, 1, 0),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name = 'Settings',Parent = Content})
+local Title = createnew('TextLabel',{Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size28,Text='Engine Customizations',TextColor3=Color3.fromRGB(0, 0, 0),TextScaled=false,TextSize=26,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=Enum.TextXAlignment.Center,TextYAlignment=Enum.TextYAlignment.Center,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.166666672, 0, 0.0249999985, 0),Rotation=0,Selectable=false,Size=UDim2.new(0, 200, 0, 36),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Title',Parent = Settings})
+local Ecosia = createnew('TextButton',{Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size24,Text='Ecosia',TextColor3=Color3.fromRGB(0, 0, 0),TextScaled=false,TextSize=20,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=Enum.TextXAlignment.Left,TextYAlignment=Enum.TextYAlignment.Center,AutoButtonColor=true,Modal=false,Selected=false,Style=Enum.ButtonStyle.Custom,Active=true,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.196666658, 0, 0.199184805, 0),Rotation=0,Selectable=true,Size=UDim2.new(0, 181, 0, 26),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Ecosia',Parent = Settings})
+local Google = createnew('TextButton',{Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size24,Text='Google',TextColor3=Color3.fromRGB(0, 0, 0),TextScaled=false,TextSize=20,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=Enum.TextXAlignment.Left,TextYAlignment=Enum.TextYAlignment.Center,AutoButtonColor=true,Modal=false,Selected=false,Style=Enum.ButtonStyle.Custom,Active=true,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.196666658, 0, 0.311684787, 0),Rotation=0,Selectable=true,Size=UDim2.new(0, 181, 0, 26),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Google',Parent = Settings})
+local Bing = createnew('TextButton',{Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size24,Text='Bing',TextColor3=Color3.fromRGB(0, 0, 0),TextScaled=false,TextSize=20,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=Enum.TextXAlignment.Left,TextYAlignment=Enum.TextYAlignment.Center,AutoButtonColor=true,Modal=false,Selected=false,Style=Enum.ButtonStyle.Custom,Active=true,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.196999997, 0, 0, 135),Rotation=0,Selectable=true,Size=UDim2.new(0, 181, 0, 26),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Bing',Parent = Settings})
+local TextLabel = createnew('TextLabel',{Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size14,Text='Powered by Peta',TextColor3=Color3.fromRGB(0.729412, 0.729412, 0.729412),TextScaled=false,TextSize=14,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=Enum.TextXAlignment.Left,TextYAlignment=Enum.TextYAlignment.Center,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.00999999978, 0, 0.950703025, 0),Rotation=0,Selectable=false,Size=UDim2.new(0, 59, 0, 15),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='TextLabel',Parent = Settings})
+local MetaInfo = createnew('Frame',{Style=Enum.FrameStyle.Custom,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=0,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0, 0, 1, 0),Rotation=0,Selectable=false,Size=UDim2.new(1, 0, 1, 0),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name = 'MetaInfo',Parent = Content})
+local MetaTitle = createnew('TextLabel',{Font=Enum.Font.SourceSansLight,TextSize=23,Text='Script Name Here',TextColor3=Color3.new(0.00392157, 0.00392157, 0.00392157),TextScaled=false,TextSize=25,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=true,TextXAlignment=Enum.TextXAlignment.Center,TextYAlignment=Enum.TextYAlignment.Top,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=0,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.0266666673, 0, 0.046875, 0),Rotation=0,Selectable=false,Size=UDim2.new(0, 282, 0, 84),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Title',Parent = MetaInfo})
+local Add = createnew('TextButton',{Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size24,Text='Add to Library',TextColor3=Color3.new(0.00392157, 0.00392157, 0.00392157),TextScaled=false,TextSize=20,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=Enum.TextXAlignment.Center,TextYAlignment=Enum.TextYAlignment.Center,AutoButtonColor=true,Modal=false,Selected=false,Style=Enum.ButtonStyle.Custom,Active=true,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=0,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.166666672, 0, 0.340624988, 0),Rotation=0,Selectable=true,Size=UDim2.new(0, 200, 0, 41),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Add',Parent = MetaInfo})
+createnew('ImageLabel',{Image='rbxassetid://728745585',ImageColor3=Color3.new(0.00392157, 0.00392157, 0.00392157),ImageRectOffset=Vector2.new(0, 0),ImageRectSize=Vector2.new(0, 0),ImageTransparency=0,ScaleType=Enum.ScaleType.Stretch,SliceCenter=Rect.new(0, 0, 0, 0),Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0, 5, 0.0979999974, 0),Rotation=0,Selectable=false,Size=UDim2.new(0, 33, 0, 33),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='ICN',Parent = Add})
+local Download = createnew('TextButton',{Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size24,Text='Download',TextColor3=Color3.new(0.00392157, 0.00392157, 0.00392157),TextScaled=false,TextSize=20,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=Enum.TextXAlignment.Center,TextYAlignment=Enum.TextYAlignment.Center,AutoButtonColor=true,Modal=false,Selected=false,Style=Enum.ButtonStyle.Custom,Active=true,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=0,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.166666672, 0, 0.484375, 0),Rotation=0,Selectable=true,Size=UDim2.new(0, 200, 0, 41),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Download',Parent = MetaInfo})
+createnew('ImageLabel',{Image='rbxassetid://1669787447',ImageColor3=Color3.new(0.00392157, 0.00392157, 0.00392157),ImageRectOffset=Vector2.new(0, 0),ImageRectSize=Vector2.new(0, 0),ImageTransparency=0,ScaleType=Enum.ScaleType.Stretch,SliceCenter=Rect.new(0, 0, 0, 0),Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0, 5, 0.0979999974, 0),Rotation=0,Selectable=false,Size=UDim2.new(0, 33, 0, 33),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='ICN',Parent = Download})
+local Close = createnew('TextButton',{Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size24,Text='Close',TextColor3=Color3.new(0.00392157, 0.00392157, 0.00392157),TextScaled=false,TextSize=20,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=Enum.TextXAlignment.Center,TextYAlignment=Enum.TextYAlignment.Center,AutoButtonColor=true,Modal=false,Selected=false,Style=Enum.ButtonStyle.Custom,Active=true,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=0,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.166999996, 0, 0.634000003, -1),Rotation=0,Selectable=true,Size=UDim2.new(0, 200, 0, 41),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Close',Parent = MetaInfo})
 local SettingsToggle = createIcon('http://www.roblox.com/asset/?id=898100298', {
 Name = "Settings";
 Size = UDim2.new(0, 20, 0, 20);
@@ -6459,7 +6459,7 @@ tabHolder["Commands List"].MouseButton1Up:Connect(function()
 local window = Window.new({width = 390, height = 303, name='Commands List', icon='rbxassetid://14541577418'})
 
 
-local doom = create('ScrollingFrame',{
+local doom = createnew('ScrollingFrame',{
 ZIndex = 8;
 ClipsDescendants = false;
 BackgroundTransparency = 1;
@@ -6491,12 +6491,12 @@ tabHolder.LocalPlayer.MouseButton1Click:Connect(function()
 
 local windo = Window.new({width = 250, height = 300, name='Player Settings', icon='rbxassetid://17314505102'})
 
-local scrlframe = create('ScrollingFrame',{BottomImage='rbxasset://textures/ui/Scroll/scroll-middle.png', ScrollBarImageTransparency=0.7,CanvasPosition=Vector2.new(0, 0),CanvasSize=UDim2.new(0, 0, 5, 0),MidImage='rbxasset://textures/ui/Scroll/scroll-middle.png',ScrollBarThickness=6,ScrollingEnabled=true,TopImage='rbxasset://textures/ui/Scroll/scroll-middle.png',Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=true,Draggable=false,Position=UDim2.new(0.025, 0, 0, 0),Rotation=0,Selectable=true,Size=UDim2.new(1, 0, 0, 600),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Tools',Parent = windo.Content})
+local scrlframe = createnew('ScrollingFrame',{BottomImage='rbxasset://textures/ui/Scroll/scroll-middle.png', ScrollBarImageTransparency=0.7,CanvasPosition=Vector2.new(0, 0),CanvasSize=UDim2.new(0, 0, 5, 0),MidImage='rbxasset://textures/ui/Scroll/scroll-middle.png',ScrollBarThickness=6,ScrollingEnabled=true,TopImage='rbxasset://textures/ui/Scroll/scroll-middle.png',Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=true,Draggable=false,Position=UDim2.new(0.025, 0, 0, 0),Rotation=0,Selectable=true,Size=UDim2.new(1, 0, 0, 600),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Tools',Parent = windo.Content})
 
 
 
 
-local ctclipuserid = create('ImageButton',{
+local ctclipuserid = createnew('ImageButton',{
 Name = "copytoclip";
 Parent = scrlframe;
 BackgroundTransparency = 1;
@@ -6507,7 +6507,7 @@ ZIndex = 10;
 })
 
 
-local userid = create('TextButton',{
+local userid = createnew('TextButton',{
 ZIndex = 8;
 Text = "UserID: " .. LclPlayer.UserId;
 Font = Enum.Font.SourceSansLight;
@@ -6524,7 +6524,7 @@ ctclipuserid.MouseButton1Click:Connect(function()
 copyclipboard(userid.Text)
 end)
 
-local username = create('TextButton',{
+local username = createnew('TextButton',{
 ZIndex = 8;
 Text = "Username: " ..LclPlayer.Name;
 TextScaled = true;
@@ -6538,7 +6538,7 @@ Parent = scrlframe;
 })
 
 
-local ctclipusername = create('ImageButton',{
+local ctclipusername = createnew('ImageButton',{
 Name = "copytoclip";
 Parent = scrlframe;
 BackgroundTransparency = 1;
@@ -6553,7 +6553,7 @@ copyclipboard(username.Text)
 end)
 
 
-local hrp = create('TextButton',{
+local hrp = createnew('TextButton',{
 ZIndex = 8;
 Text = "HRP Position: " .. tostring(LclPlayer.Character.HumanoidRootPart.Position);
 TextScaled = true;
@@ -6570,7 +6570,7 @@ game:GetService('RunService').Stepped:connect(function()
 hrp.Text = "HRP Position: " .. tostring(LclPlayer.Character.HumanoidRootPart.Position);
 end)
 
-local ctcliphrp = create('ImageButton',{
+local ctcliphrp = createnew('ImageButton',{
 Name = "copytoclip";
 Parent = scrlframe;
 BackgroundTransparency = 1;
@@ -6585,7 +6585,7 @@ ctcliphrp.MouseButton1Click:Connect(function()
 copyclipboard(hrp.Text)
 end)
 
-local walkspe = create('TextButton',{
+local walkspe = createnew('TextButton',{
 ZIndex = 8;
 Text = "Walkspeed";
 TextScaled = true;
@@ -6600,7 +6600,7 @@ Parent = scrlframe;
 
 
 
-local hiphigh = create('TextButton',{
+local hiphigh = createnew('TextButton',{
 ZIndex = 8;
 Text = "Hiphieght";
 TextScaled = true;
@@ -6614,7 +6614,7 @@ Parent = scrlframe;
 })
 
 
-local jumppow = create('TextButton',{
+local jumppow = createnew('TextButton',{
 ZIndex = 8;
 Text = "JumpPower";
 TextScaled = true;
@@ -6628,7 +6628,7 @@ Parent = scrlframe;
 })
 
 
-local hiphighset  = create('TextBox',{
+local hiphighset  = createnew('TextBox',{
 ZIndex = 8;
 Text = tostring(LclPlayer.Character.Humanoid.HipHeight);
 ClearTextOnFocus = false;
@@ -6653,7 +6653,7 @@ LclPlayer.Character.Humanoid.HipHeight = hiphighset.Text
 end
 end)
 
-local jumppowset  = create('TextBox',{
+local jumppowset  = createnew('TextBox',{
 ZIndex = 8;
 Text = tostring(LclPlayer.Character.Humanoid.JumpPower);
 ClearTextOnFocus = false;
@@ -6678,7 +6678,7 @@ LclPlayer.Character.Humanoid.JumpPower = jumppowset.Text
 end
 end)
 
-local walkspeset  = create('TextBox',{
+local walkspeset  = createnew('TextBox',{
 ZIndex = 8;
 Text = tostring(LclPlayer.Character.Humanoid.WalkSpeed);
 ClearTextOnFocus = false;
@@ -6703,7 +6703,7 @@ end
 end)
 -- newer
 
-local sitting = create('TextButton',{
+local sitting = createnew('TextButton',{
 ZIndex = 8;
 Text = "Sit";
 Font = Enum.Font.SourceSansLight;
@@ -6719,7 +6719,7 @@ sitting.MouseButton1Click:Connect(function()
 LclPlayer.Character:FindFirstChildWhichIsA("Humanoid").Sit = true
 end)
 
-local jumpbtn = create('TextButton',{
+local jumpbtn = createnew('TextButton',{
 ZIndex = 8;
 Text = "Jump";
 Font = Enum.Font.SourceSansLight;
@@ -6735,7 +6735,7 @@ jumpbtn.MouseButton1Click:Connect(function()
 LclPlayer.Character:FindFirstChildWhichIsA("Humanoid"):ChangeState(Enum.HumanoidStateType.Jumping)
 end)
 
-local mzo = create('TextButton',{
+local mzo = createnew('TextButton',{
 ZIndex = 8;
 Text = "MaxZoom";
 TextScaled = true;
@@ -6747,7 +6747,7 @@ Font = Enum.Font.SourceSansLight;
 Position = UDim2.new(0.025,0,0,240);
 Parent = scrlframe;
 })
-local Mzoomopt  = create('TextBox',{
+local Mzoomopt  = createnew('TextBox',{
 ZIndex = 8;
 Text = tostring(LclPlayer.CameraMaxZoomDistance);
 ClearTextOnFocus = false;
@@ -6767,7 +6767,7 @@ LclPlayer.CameraMaxZoomDistance = Mzoomopt.Text
 end
 end)
 
-local minzo = create('TextButton',{
+local minzo = createnew('TextButton',{
 ZIndex = 8;
 Text = "MinZoom";
 TextScaled = true;
@@ -6779,7 +6779,7 @@ Font = Enum.Font.SourceSansLight;
 Position = UDim2.new(0.025,0,0,270);
 Parent = scrlframe;
 })
-local Minzoomopt  = create('TextBox',{
+local Minzoomopt  = createnew('TextBox',{
 ZIndex = 8;
 Text = tostring(LclPlayer.CameraMinZoomDistance);
 ClearTextOnFocus = false;
@@ -6799,7 +6799,7 @@ LclPlayer.CameraMinZoomDistance = Minzoomopt.Text
 end
 end)
 
-local ajump = create('TextButton',{
+local ajump = createnew('TextButton',{
 ZIndex = 8;
 Text = "AutoJump";
 TextScaled = true;
@@ -6811,7 +6811,7 @@ Font = Enum.Font.SourceSansLight;
 Position = UDim2.new(0.025,0,0,300);
 Parent = scrlframe;
 })
-local ajumpopt  = create('TextBox',{
+local ajumpopt  = createnew('TextBox',{
 ZIndex = 8;
 Text = tostring(LclPlayer.AutoJumpEnabled);
 ClearTextOnFocus = false;
@@ -6831,7 +6831,7 @@ LclPlayer.AutoJumpEnabled = ajumpopt.Text
 end
 end)
 
-local nddis = create('TextButton',{
+local nddis = createnew('TextButton',{
 ZIndex = 8;
 Text = "NameDisplayDistance";
 TextScaled = true;
@@ -6843,7 +6843,7 @@ Font = Enum.Font.SourceSansLight;
 Position = UDim2.new(0.025,0,0,330);
 Parent = scrlframe;
 })
-local nopt  = create('TextBox',{
+local nopt  = createnew('TextBox',{
 ZIndex = 8;
 Text = tostring(LclPlayer.NameDisplayDistance);
 ClearTextOnFocus = false;
@@ -6871,7 +6871,7 @@ tabHolder["Player Sniper"].MouseButton1Click:Connect(function()
 
 local window = Window.new({width = 300, height = 205, name='Player Sniper', icon='rbxassetid://17314502332'})
 
-local gamid  = create('TextBox',{
+local gamid  = createnew('TextBox',{
 ZIndex = 8;
 Text = "";
 ClearTextOnFocus = false;
@@ -6897,7 +6897,7 @@ end
 end)
 
 
-local plrid  = create('TextBox',{
+local plrid  = createnew('TextBox',{
 ZIndex = 8;
 Text = "";
 ClearTextOnFocus = false;
@@ -6914,7 +6914,7 @@ Parent = window.Content;
 })
 
 
-local statusman = create('TextButton',{
+local statusman = createnew('TextButton',{
 ZIndex = 8;
 Text = "Status: Working";
 TextScaled = true;
@@ -6928,7 +6928,7 @@ Parent = window.Content;
 })
 
 
-local currentlyman = create('TextButton',{
+local currentlyman = createnew('TextButton',{
 ZIndex = 8;
 Text = "Use Current Game's ID";
 TextScaled = true;
@@ -6946,7 +6946,7 @@ gamid.Text = game.PlaceId
 end)
 
 
-local joinplr = create('TextButton',{
+local joinplr = createnew('TextButton',{
 ZIndex = 8;
 Text = "Join";
 TextScaled = true;
@@ -6961,7 +6961,7 @@ Parent = window.Content;
 
 
 
-local searchforit = create('TextButton',{
+local searchforit = createnew('TextButton',{
 ZIndex = 8;
 Text = "Snipe";
 TextScaled = true;
@@ -7384,12 +7384,12 @@ end)
 tabHolder.Server.MouseButton1Click:Connect(function()
 local windo = Window.new({width = 250, height = 300, name='Server', icon='rbxassetid://17335412381'})
 
-local scrollman = create('ScrollingFrame',{BottomImage='rbxasset://textures/ui/Scroll/scroll-middle.png', ScrollBarImageTransparency=0.7,CanvasPosition=Vector2.new(0, 0),CanvasSize=UDim2.new(0, 0, 5, 0),MidImage='rbxasset://textures/ui/Scroll/scroll-middle.png',ScrollBarThickness=6,ScrollingEnabled=true,TopImage='rbxasset://textures/ui/Scroll/scroll-middle.png',Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=true,Draggable=false,Position=UDim2.new(0.025, 0, 0, 0),Rotation=0,Selectable=true,Size=UDim2.new(1, 0, 0, 600),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Tools',Parent = windo.Content})
+local scrollman = createnew('ScrollingFrame',{BottomImage='rbxasset://textures/ui/Scroll/scroll-middle.png', ScrollBarImageTransparency=0.7,CanvasPosition=Vector2.new(0, 0),CanvasSize=UDim2.new(0, 0, 5, 0),MidImage='rbxasset://textures/ui/Scroll/scroll-middle.png',ScrollBarThickness=6,ScrollingEnabled=true,TopImage='rbxasset://textures/ui/Scroll/scroll-middle.png',Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=true,Draggable=false,Position=UDim2.new(0.025, 0, 0, 0),Rotation=0,Selectable=true,Size=UDim2.new(1, 0, 0, 600),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Tools',Parent = windo.Content})
 
 
 
 
-local ctclipplace = create('ImageButton',{
+local ctclipplace = createnew('ImageButton',{
 Name = "copytoclip";
 Parent = scrollman;
 BackgroundTransparency = 1;
@@ -7400,7 +7400,7 @@ ZIndex = 10;
 })
 
 
-local placeidreal = create('TextButton',{
+local placeidreal = createnew('TextButton',{
 ZIndex = 8;
 Text = "PlaceID: " .. PlaceId;
 Font = Enum.Font.SourceSansLight;
@@ -7421,7 +7421,7 @@ end)
 local Asset = MarketplaceService:GetProductInfo(PlaceId)
 print(Asset)
 
-local gamenam = create('TextButton',{
+local gamenam = createnew('TextButton',{
 ZIndex = 8;
 Text = "Name: " ..Asset.Name;
 TextScaled = true;
@@ -7435,7 +7435,7 @@ Parent = scrollman;
 })
 
 
-local ctclipgn = create('ImageButton',{
+local ctclipgn = createnew('ImageButton',{
 Name = "copytoclip";
 Parent = scrlframe;
 BackgroundTransparency = 1;
@@ -7450,7 +7450,7 @@ copyclipboard(Asset.Name)
 end)
 
 
-local plrs = create('TextButton',{
+local plrs = createnew('TextButton',{
 ZIndex = 8;
 Text = "Max Players: " .. Players.MaxPlayers;
 TextScaled = true;
@@ -7464,7 +7464,7 @@ Parent = scrollman;
 })
 
 
-local created = create('TextButton',{
+local created = createnew('TextButton',{
 ZIndex = 8;
 Text = "Created: " .. Asset.Created;
 TextScaled = true;
@@ -7478,7 +7478,7 @@ Parent = scrollman;
 })
 
 
-local update = create('TextButton',{
+local update = createnew('TextButton',{
 ZIndex = 8;
 Text = "Last Updated: " .. Asset.Updated;
 TextScaled = true;
@@ -7506,7 +7506,7 @@ cratername = GroupService:GetGroupInfoAsync(game.CreatorId).Owner
 end
 
 
-local crater = create('TextButton',{
+local crater = createnew('TextButton',{
 ZIndex = 8;
 Text = "Creator: " .. tostring(cratername);
 TextScaled = true;
@@ -7520,7 +7520,7 @@ Parent = scrollman;
 })
 
 
-local crater = create('TextButton',{
+local crater = createnew('TextButton',{
 ZIndex = 8;
 Text = "Creator ID: " .. craterid;
 TextScaled = true;
@@ -7533,7 +7533,7 @@ Position = UDim2.new(0.025,0,0,180);
 Parent = scrollman;
 })
 
-local gra = create('TextButton',{
+local gra = createnew('TextButton',{
 ZIndex = 8;
 Text = "Gravity";
 TextScaled = true;
@@ -7545,7 +7545,7 @@ Font = Enum.Font.SourceSansLight;
 Position = UDim2.new(0.025,0,0,210);
 Parent = scrollman;
 })
-local gravop  = create('TextBox',{
+local gravop  = createnew('TextBox',{
 ZIndex = 8;
 Text = tostring(workspace.Gravity);
 ClearTextOnFocus = false;
@@ -7565,7 +7565,7 @@ workspace.Gravity = gravop.Text
 end
 end)
 
-local gra = create('TextButton',{
+local gra = createnew('TextButton',{
 ZIndex = 8;
 Text = "DestroyHeight";
 TextScaled = true;
@@ -7577,7 +7577,7 @@ Font = Enum.Font.SourceSansLight;
 Position = UDim2.new(0.025,0,0,240);
 Parent = scrollman;
 })
-local dhop  = create('TextBox',{
+local dhop  = createnew('TextBox',{
 ZIndex = 8;
 Text = tostring(workspace.FallenPartsDestroyHeight);
 ClearTextOnFocus = false;
@@ -7597,7 +7597,7 @@ workspace.FallenPartsDestroyHeight = dhop.Text
 end
 end)
 
-local frez = create('TextButton',{
+local frez = createnew('TextButton',{
 ZIndex = 8;
 Text = "Freeze parts [Unanchored]";
 TextScaled = true;
@@ -7622,7 +7622,7 @@ frez.Text = "UnFreeze parts [Unanchored]"
 end
 end)
 
-local delp = create('TextButton',{
+local delp = createnew('TextButton',{
 ZIndex = 8;
 Text = "Delete parts [Unanchored]";
 TextScaled = true;
@@ -7662,11 +7662,11 @@ local window = Window.new({width = 420, height = 291, name='Players', icon='rbxa
 
 local Content = window.Content
 
-local PlrsHolder = create('ScrollingFrame',{BottomImage='rbxasset://textures/ui/Scroll/scroll-middle.png', ScrollBarImageTransparency=0.7,CanvasPosition=Vector2.new(0, 0),CanvasSize=UDim2.new(0, 0, 0, 0),MidImage='rbxasset://textures/ui/Scroll/scroll-middle.png',ScrollBarThickness=6,ScrollingEnabled=true,TopImage='rbxasset://textures/ui/Scroll/scroll-middle.png',Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=true,Draggable=false,Position=UDim2.new(0.01, 0, 0, 0),Rotation=0,Selectable=true,Size=UDim2.new(0.296, 0, 0, 260),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='plrs',Parent = Content})
+local PlrsHolder = createnew('ScrollingFrame',{BottomImage='rbxasset://textures/ui/Scroll/scroll-middle.png', ScrollBarImageTransparency=0.7,CanvasPosition=Vector2.new(0, 0),CanvasSize=UDim2.new(0, 0, 0, 0),MidImage='rbxasset://textures/ui/Scroll/scroll-middle.png',ScrollBarThickness=6,ScrollingEnabled=true,TopImage='rbxasset://textures/ui/Scroll/scroll-middle.png',Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=true,Draggable=false,Position=UDim2.new(0.01, 0, 0, 0),Rotation=0,Selectable=true,Size=UDim2.new(0.296, 0, 0, 260),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='plrs',Parent = Content})
 
 PlrsHolder.AutomaticCanvasSize = Enum.AutomaticSize.Y
 
-local FCon = create('ScrollingFrame',{BottomImage='rbxasset://textures/ui/Scroll/scroll-middle.png', ScrollBarImageTransparency=0.7,CanvasPosition=Vector2.new(0, 0),CanvasSize=UDim2.new(0, 0, 0, 0),MidImage='rbxasset://textures/ui/Scroll/scroll-middle.png',ScrollBarThickness=6,ScrollingEnabled=true,TopImage='rbxasset://textures/ui/Scroll/scroll-middle.png',Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=true,Draggable=false,Position=UDim2.new(0.3, 0, 0, 127),Rotation=0,Selectable=true,Size=UDim2.new(0.682, 0, 0, 129),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='plrs',Parent = Content})
+local FCon = createnew('ScrollingFrame',{BottomImage='rbxasset://textures/ui/Scroll/scroll-middle.png', ScrollBarImageTransparency=0.7,CanvasPosition=Vector2.new(0, 0),CanvasSize=UDim2.new(0, 0, 0, 0),MidImage='rbxasset://textures/ui/Scroll/scroll-middle.png',ScrollBarThickness=6,ScrollingEnabled=true,TopImage='rbxasset://textures/ui/Scroll/scroll-middle.png',Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=true,Draggable=false,Position=UDim2.new(0.3, 0, 0, 127),Rotation=0,Selectable=true,Size=UDim2.new(0.682, 0, 0, 129),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='plrs',Parent = Content})
 
 FCon.AutomaticCanvasSize = Enum.AutomaticSize.Y
 
@@ -7674,7 +7674,7 @@ FCon.AutomaticCanvasSize = Enum.AutomaticSize.Y
 prevp = 0
 local SelPlr
 
-local PlrName = create('TextLabel',{
+local PlrName = createnew('TextLabel',{
 ZIndex = 9;
 Text = "Nil";
 Font = Enum.Font.SourceSansSemibold;
@@ -7688,7 +7688,7 @@ TextSize = 14;
 Parent = Content;
 })
 
-local Plrid = create('TextLabel',{
+local Plrid = createnew('TextLabel',{
 ZIndex = 8;
 Text = "ID: 0000000";
 Font = Enum.Font.SourceSansSemibold;
@@ -7704,7 +7704,7 @@ TextYAlignment = Enum.TextYAlignment.Top;
 Parent = Content;
 })
 
-local PlrAge = create('TextLabel',{
+local PlrAge = createnew('TextLabel',{
 ZIndex = 8;
 Text = "Age: 000";
 Font = Enum.Font.SourceSansSemibold;
@@ -7718,7 +7718,7 @@ TextSize = 14;
 Parent = Content;
 })
 
-local Plrteam = create('TextLabel',{
+local Plrteam = createnew('TextLabel',{
 ZIndex = 8;
 Text = "Team: Nil";
 Font = Enum.Font.SourceSansSemibold;
@@ -7734,7 +7734,7 @@ TextYAlignment = Enum.TextYAlignment.Top;
 Parent = Content;
 })
 
-local WhiteAsth = create('TextButton',{
+local WhiteAsth = createnew('TextButton',{
 ZIndex = 8;
 Text = "";
 Font = Enum.Font.SourceSansLight;
@@ -7747,7 +7747,7 @@ Position = UDim2.new(0.31,0,0,0);
 Parent = Content;
 })
 
-local PlrIcon = create('ImageLabel', {
+local PlrIcon = createnew('ImageLabel', {
 Name = "Icon";
 Size = UDim2.new(0, 111, 0, 111);
 BackgroundTransparency = .9;
@@ -7764,7 +7764,7 @@ local roundings = Instance.new("UICorner")
 roundings.CornerRadius = UDim.new(0, 8)
 roundings.Parent = PlrIcon
 
-local Viewplr = create('TextButton',{
+local Viewplr = createnew('TextButton',{
 Font = Enum.Font.SourceSansLight;
 ZIndex = 8;
 Text = "View";
@@ -7777,7 +7777,7 @@ Position = UDim2.new(0,4.5,0,0);
 Parent = FCon;
 })
 
-local flingbtn = create('TextButton',{
+local flingbtn = createnew('TextButton',{
 Font = Enum.Font.SourceSansLight;
 ZIndex = 8;
 Text = "Fling";
@@ -7794,7 +7794,7 @@ flingbtn.MouseButton1Click:Connect(function()
 runCmd("fling " ..SelPlr.Name)
 end)
 
-local Bbtn = create('TextButton',{
+local Bbtn = createnew('TextButton',{
 Font = Enum.Font.SourceSansLight;
 ZIndex = 8;
 Text = "Bang";
@@ -7807,7 +7807,7 @@ Position = UDim2.new(0,4.5,0,52);
 Parent = FCon;
 })
 
-local Blackhp = create('TextButton',{
+local Blackhp = createnew('TextButton',{
 Font = Enum.Font.SourceSansLight;
 ZIndex = 8;
 Text = "BlackHole Parts\n[UNANCHORED]";
@@ -7844,7 +7844,7 @@ Bbtn.Text = "Unbang"
 end
 end)
 
-local copyuserid = create('ImageButton',{
+local copyuserid = createnew('ImageButton',{
 Name = "copytoclipu";
 Parent = Content;
 BackgroundTransparency = 1;
@@ -7860,7 +7860,7 @@ end)
 
 SelPlr = LclPlayer
 
-local Gotoplr = create('TextButton',{
+local Gotoplr = createnew('TextButton',{
 Font = Enum.Font.SourceSansLight;
 ZIndex = 8;
 Text = "Goto";
@@ -7874,7 +7874,7 @@ Parent = FCon;
 })
 
 headyes = false
-local headsi = create('TextButton',{
+local headsi = createnew('TextButton',{
 Font = Enum.Font.SourceSansLight;
 ZIndex = 8;
 Text = "HeadSit";
@@ -7898,7 +7898,7 @@ headsi.Text = "UnHeadSit"
 end
 end)
 
-local getdes = create('TextButton',{
+local getdes = createnew('TextButton',{
 Font = Enum.Font.SourceSansLight;
 ZIndex = 8;
 Text = "Get Desc";
@@ -7942,7 +7942,7 @@ local BeenASecond, V3 = false, Vector3.new(0, 0, 0)
 end
 end)
 
-local Loopgoto = create('TextButton',{
+local Loopgoto = createnew('TextButton',{
 Font = Enum.Font.SourceSansLight;
 ZIndex = 8;
 Text = "LoopGoto";
@@ -7955,7 +7955,7 @@ Position = UDim2.new(0,193.4,0,0);
 Parent = FCon;
 })
 
-local obitplr = create('TextButton',{
+local obitplr = createnew('TextButton',{
 Font = Enum.Font.SourceSansLight;
 ZIndex = 8;
 Text = "Orbit";
@@ -7982,7 +7982,7 @@ end
 end)
 
 followingplr = false
-local fplrez = create('TextButton',{
+local fplrez = createnew('TextButton',{
 Font = Enum.Font.SourceSansLight;
 ZIndex = 8;
 Text = "Follow";
@@ -8029,7 +8029,7 @@ Loopgoto.Text = "loopGoto"
 end
 end)
 
-local bringpat = create('TextButton',{
+local bringpat = createnew('TextButton',{
 Font = Enum.Font.SourceSansLight;
 ZIndex = 8;
 Text = "Bring Parts\n[UNANCHORED]";
@@ -8101,7 +8101,7 @@ end
 task.wait()
 
 for i,v in pairs(Players:GetPlayers()) do
-local PlrBtn = create('TextButton',{
+local PlrBtn = createnew('TextButton',{
 ZIndex = 8;
 Text = v.Name .. "\n[" .. v.DisplayName .. "]";
 Font = Enum.Font.SourceSansLight;
@@ -8156,11 +8156,11 @@ end
 
 end
 
-local SearchE = create('TextBox',{ClearTextOnFocus=true,Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size24,MultiLine=false,Text='Search Scripts',TextColor3=Color3.fromRGB(255,255,255), PlaceholderText='', PlaceholderColor3=Color3.fromRGB(0.7, 0.7, 0.7),TextScaled=false,TextSize=22,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=true,TextXAlignment=Enum.TextXAlignment.Center,TextYAlignment=Enum.TextYAlignment.Bottom,Active=true,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.025, 0, 0, 0),Rotation=0,Selectable=true,Size=UDim2.new(0.95, 0,0.1, 0),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=9,Name='Searchs',Parent = windo.Content})
+local SearchE = createnew('TextBox',{ClearTextOnFocus=true,Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size24,MultiLine=false,Text='Search Scripts',TextColor3=Color3.fromRGB(255,255,255), PlaceholderText='', PlaceholderColor3=Color3.fromRGB(0.7, 0.7, 0.7),TextScaled=false,TextSize=22,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=true,TextXAlignment=Enum.TextXAlignment.Center,TextYAlignment=Enum.TextYAlignment.Bottom,Active=true,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.025, 0, 0, 0),Rotation=0,Selectable=true,Size=UDim2.new(0.95, 0,0.1, 0),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=9,Name='Searchs',Parent = windo.Content})
 
 materializet(SearchE, Color3.fromRGB(255,255,255), "Search Scripts")
 
-local sholder = create('ScrollingFrame',{BottomImage='rbxasset://textures/ui/Scroll/scroll-middle.png', ScrollBarImageTransparency=0.7,CanvasPosition=Vector2.new(0, 0),CanvasSize=UDim2.new(0, 0, 6, 0),MidImage='rbxasset://textures/ui/Scroll/scroll-middle.png',ScrollBarThickness=6,ScrollingEnabled=true,TopImage='rbxasset://textures/ui/Scroll/scroll-middle.png',Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=true,Draggable=false,Position=UDim2.new(0.025, 0, 0, 30),Rotation=0,Selectable=true,Size=UDim2.new(1, 0, 0, 600),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Tools',Parent = windo.Content})
+local sholder = createnew('ScrollingFrame',{BottomImage='rbxasset://textures/ui/Scroll/scroll-middle.png', ScrollBarImageTransparency=0.7,CanvasPosition=Vector2.new(0, 0),CanvasSize=UDim2.new(0, 0, 6, 0),MidImage='rbxasset://textures/ui/Scroll/scroll-middle.png',ScrollBarThickness=6,ScrollingEnabled=true,TopImage='rbxasset://textures/ui/Scroll/scroll-middle.png',Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=true,Draggable=false,Position=UDim2.new(0.025, 0, 0, 30),Rotation=0,Selectable=true,Size=UDim2.new(1, 0, 0, 600),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Tools',Parent = windo.Content})
 
 local UIListLayout = Instance.new("UIListLayout", sholder)
 UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
@@ -8170,7 +8170,7 @@ UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 offsetpos = 0
 function createbtn(name, runi, bname)
 bname = name
-local Example = create('TextButton',{
+local Example = createnew('TextButton',{
 ZIndex = 8;
 Text = "";
 Font = Enum.Font.SourceSansLight;
@@ -8185,7 +8185,7 @@ Name = bname;
 Parent = sholder;
 })
 
-local execbtn = create('TextButton',{
+local execbtn = createnew('TextButton',{
 ZIndex = 8;
 Text = "Execute";
 Font = Enum.Font.SourceSansLight;
@@ -8199,7 +8199,7 @@ ClipsDescendants = true;
 Parent = Example;
 })
 
-local rsicon = create('ImageLabel', {
+local rsicon = createnew('ImageLabel', {
 Name = "Icon";
 Size = UDim2.new(0, 121, 0, 95);
 BackgroundTransparency = 1;
@@ -8212,7 +8212,7 @@ BackgroundColor3 = Color3.fromRGB(200,200,200);
 Parent = Example;
 })
 
-local Names = create('TextLabel',{
+local Names = createnew('TextLabel',{
 ZIndex = 8;
 Text = name;
 Font = Enum.Font.SourceSansSemibold;
@@ -8261,9 +8261,9 @@ end)
 tabHolder.Tools.MouseButton1Click:Connect(function()
 local windo = Window.new({width = 250, height = 300, name='Tools', icon='rbxassetid://18900459968'})
 
-local scrollman = create('ScrollingFrame',{BottomImage='rbxasset://textures/ui/Scroll/scroll-middle.png', ScrollBarImageTransparency=0.7,CanvasPosition=Vector2.new(0, 0),CanvasSize=UDim2.new(0, 0, 100, 0),MidImage='rbxasset://textures/ui/Scroll/scroll-middle.png',ScrollBarThickness=6,ScrollingEnabled=true,TopImage='rbxasset://textures/ui/Scroll/scroll-middle.png',Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=true,Draggable=false,Position=UDim2.new(0.025, 0, 0, 0),Rotation=0,Selectable=true,Size=UDim2.new(1, 0, 0, 600),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Tools',Parent = windo.Content})
+local scrollman = createnew('ScrollingFrame',{BottomImage='rbxasset://textures/ui/Scroll/scroll-middle.png', ScrollBarImageTransparency=0.7,CanvasPosition=Vector2.new(0, 0),CanvasSize=UDim2.new(0, 0, 100, 0),MidImage='rbxasset://textures/ui/Scroll/scroll-middle.png',ScrollBarThickness=6,ScrollingEnabled=true,TopImage='rbxasset://textures/ui/Scroll/scroll-middle.png',Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=0,ClipsDescendants=true,Draggable=false,Position=UDim2.new(0.025, 0, 0, 0),Rotation=0,Selectable=true,Size=UDim2.new(1, 0, 0, 600),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Tools',Parent = windo.Content})
 
-local dexbtn = create('TextButton',{
+local dexbtn = createnew('TextButton',{
 ZIndex = 8;
 Text = "Dex";
 Font = Enum.Font.SourceSansLight;
@@ -8276,7 +8276,7 @@ Position = UDim2.new(0.025,0,0,0);
 Parent = scrollman;
 })
 
-local fpsunlo = create('TextButton',{
+local fpsunlo = createnew('TextButton',{
 ZIndex = 8;
 Text = "Set FPS Cap";
 TextScaled = true;
@@ -8289,7 +8289,7 @@ Position = UDim2.new(0.025,0,0,30);
 Parent = scrollman;
 })
 
-local rspyex = create('TextButton',{
+local rspyex = createnew('TextButton',{
 Font = Enum.Font.SourceSansLight;
 ZIndex = 8;
 Text = "Remote Spy [EXTERNAL]";
@@ -8302,7 +8302,7 @@ Position = UDim2.new(0.025,0,0,60);
 Parent = scrollman;
 })
 
-local fextool = create('TextButton',{
+local fextool = createnew('TextButton',{
 Font = Enum.Font.SourceSansLight;
 ZIndex = 8;
 Text = "F3X [CLIENT]";
@@ -8315,7 +8315,7 @@ Position = UDim2.new(0.025,0,0,120);
 Parent = scrollman;
 })
 
-local unctstbtn = create('TextButton',{
+local unctstbtn = createnew('TextButton',{
 Font = Enum.Font.SourceSansLight;
 ZIndex = 8;
 Text = "UNC Test";
@@ -8329,7 +8329,7 @@ Parent = scrollman;
 })
 
 
-local slistbtn = create('TextButton',{
+local slistbtn = createnew('TextButton',{
 Font = Enum.Font.SourceSansLight;
 ZIndex = 8;
 Text = "Server List [EXTERNAL]";
@@ -8342,7 +8342,7 @@ Position = UDim2.new(0.025,0,0,150);
 Parent = scrollman;
 })
 
-local subbtn = create('TextButton',{
+local subbtn = createnew('TextButton',{
 Font = Enum.Font.SourceSansLight;
 ZIndex = 8;
 Text = "SubPlace Viewer [EXTERNAL]";
@@ -8355,7 +8355,7 @@ Position = UDim2.new(0.025,0,0,180);
 Parent = scrollman;
 })
 
-local jlogsbtn = create('TextButton',{
+local jlogsbtn = createnew('TextButton',{
 Font = Enum.Font.SourceSansLight;
 ZIndex = 8;
 Text = "Join Logs";
@@ -8372,7 +8372,7 @@ jlogsbtn.MouseButton1Click:Connect(function()
 joinlogsstart()
 end)
 
-local clogsbtn = create('TextButton',{
+local clogsbtn = createnew('TextButton',{
 Font = Enum.Font.SourceSansLight;
 ZIndex = 8;
 Text = "Chat Logs";
@@ -8405,7 +8405,7 @@ dexbtn.MouseButton1Down:connect(function()
 
 local window = Window.new({width = 300, height = 165, name='Dex Selection', icon='rbxassetid://0'})
 
-local dexv2 = create('TextButton',{
+local dexv2 = createnew('TextButton',{
 ZIndex = 8;
 Text = "Dex v2 [EXTERNAL]";
 TextScaled = true;
@@ -8422,7 +8422,7 @@ dexv2.MouseButton1Click:Connect(function()
 loadstring(game:HttpGet("https://cdn.wearedevs.net/scripts/Dex%20Explorer.txt"))()
 end)
 
-local moondex = create('TextButton',{
+local moondex = createnew('TextButton',{
 ZIndex = 8;
 Text = "Moon Dex [EXTERNAL]";
 TextScaled = true;
@@ -8439,7 +8439,7 @@ moondex.MouseButton1Click:Connect(function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))()
 end)
 
-local sdex = create('TextButton',{
+local sdex = createnew('TextButton',{
 ZIndex = 8;
 Text = "Dex v4 Mobile [KEY] [EXTERNAL]";
 TextScaled = true;
@@ -8463,7 +8463,7 @@ end)
 fpsunlo.MouseButton1Click:Connect(function()
 
 local window = Window.new({width = 165, height = 100, name='Set FPS', icon='rbxassetid://0'})
-local fpslabel = create('TextLabel',{
+local fpslabel = createnew('TextLabel',{
 ZIndex = 8;
 Text = "FPS";
 TextScaled = true;
@@ -8474,7 +8474,7 @@ Size = UDim2.new(0,60,0,60);
 Position = UDim2.new(0.45,-60,0.05,0);
 Parent = window.Content;
 })
-local fpslevelbox  = create('TextBox',{
+local fpslevelbox  = createnew('TextBox',{
 ZIndex = 8;
 Text = "60";
 ClearTextOnFocus = false;
@@ -8564,9 +8564,9 @@ Position = UDim2.new(.5,-50,0,-150);
 Visible = true;
 Parent = gui;
 })
-local IntroText2 = create('TextLabel',{
+local IntroText2 = createnew('TextLabel',{
 Transparency = 1;
-Text = "Krunox V3";
+Text = "Krunox V3.0.1";
 TextSize = 42;
 TextColor3 = Color3.new(1,1,1);
 Font = Enum.Font.SourceSansLight;
@@ -8574,7 +8574,7 @@ Position = UDim2.new(0,0,0,-42);
 Size = UDim2.new(1,0,0,42);
 Parent = Intro;
 })
-local IntroText = create('TextLabel',{
+local IntroText = createnew('TextLabel',{
 Transparency = 1;
 Text = "Created by Tesker103 (@GetRenq)";
 TextSize = 32;
