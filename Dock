@@ -9261,7 +9261,7 @@ createbtn("FE Animation Changer","https://raw.githubusercontent.com/RubyBoo4life
 createbtn("FE Energize Animation GUI","https://raw.githubusercontent.com/IlikeyocutgHAH12/FEEGGEG/main/%5BFE%5D%20Energize%20Animation%20Gui.txt")
 createbtn("Fling All","https://pastebin.com/raw/zqyDSUWX")
 createbtn("EZ Hub 150 Games","https://raw.githubusercontent.com/debug42O/Ez-Industries-Launcher-Data/master/Launcher.lua")
-createbtn("FE SUPER RING PARTS BY YUMM","https://pastefy.app/HMPrXacS/raw")
+createbtn("FE F3X Replicator","https://hastebin.skyra.pw/raw/upibijuhuo")
 createbtn("Kawaii freaky fling","https://raw.githubusercontent.com/hellohellohell012321/KAWAII-FREAKY-FLING/main/kawaii_freaky_fling.lua")
 
 local Frame: ScrollingFrame = sholder -- Put the parent of the buttons here instead of nil
