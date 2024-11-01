@@ -430,32 +430,6 @@ local list = {
 "",
 }
 
-if delbackdf or carbackdf then
-table.insert(list, 1, "-- BACKDOOR COMMANDS --")
-table.insert(list, 2, "[1] Kill {plr} - kills player")
-table.insert(list, 3, "[2] Naked {plr} - makes player naked")
-table.insert(list, 4, "[3] Faceless {plr} - makes player faceless")
-table.insert(list, 5, "[4] Ban {plr} - bans player")
-table.insert(list, 6, "[5] Unban {plr} - unbans player")
-table.insert(list, 7, "[6] Kick {plr} - kicks player")
-table.insert(list, 8, "[7] Nora {plr} - Removes players right arm")
-table.insert(list, 9, "[8] Nola {plr} - Removes players left arm")
-table.insert(list, 10, "[9] Norl {plr} - Removes players right leg")
-table.insert(list, 11, "[10] Noll {plr} - Removes players left leg")
-table.insert(list, 12, "[11] Blockchar {plr} - Makes players character look blocky")
-table.insert(list, 13, "[12] Noanim {plr} - Removes players animation")
-table.insert(list, 14, "[13] Punish {plr} - Punishes player (NOT UNDOABLE)")
-table.insert(list, 15, "[14] Shirtless {plr} - Removes players shirt")
-table.insert(list, 16, "[15] Tshirtless {plr} - Removes players tshirt")
-table.insert(list, 17, "[16] Box {plr} - Makes player a box")
-table.insert(list, 18, "[17] Notools {plr} - Removes all tools from players inventory")
-table.insert(list, 19, "[18] Bald {plr} - Makes player bald")
-table.insert(list, 20, "[19] Sink {plr} - Sinks player")
-table.insert(list, 21, "[20] Slock - Locks server")
-table.insert(list, 22, "[21] Unslock - Unlocks server")
-table.insert(list, 23, "-- NORMAL COMMANDS --")
-end
-
 function chatMessage(str)
     str = tostring(str)
     if TextChatService.ChatVersion == Enum.ChatVersion.TextChatService then
@@ -4764,219 +4738,6 @@ end
 end)
 
 -- all new
-
-if carbackdf or delbackdf then
-AddCommand("naked", function()
-for i,v in pairs(GetPlayer(args[2])) do
-local plr = Players[v]
-		runinst(plr.Character:FindFirstChildOfClass("Pants"))
-		runinst(plr.Character:FindFirstChildOfClass("Shirt"))
-		runinst(plr.Character:FindFirstChildOfClass("ShirtGraphic"))
-	end
-end)
-
-AddCommand("faceless", function()
-for i,v in pairs(GetPlayer(args[2])) do
-local plr = Players[v]
-		runinst(plr.Character.Head:FindFirstChildOfClass("Decal"))
-	end
-end)
-SLock = false
-
-local banned = {}
-Players.PlayerAdded:connect(function(plr)
-	if SLock then
-		Destroy(plr)
-	end
-	if FindInTable(banned, plr.UserId) then
-		Destroy(plr)
-	end
-end)
-
-AddCommand("ban", function()
-for i,v in pairs(GetPlayer(args[2])) do
-local plr = Players[v]
-	table.insert(banned, plr.UserId)
-runinst(plr)
-end
-end)
-
-AddCommand("kick", function()
-for i,v in pairs(GetPlayer(args[2])) do
-local plr = Players[v]
-	
-runinst(plr)
-end
-end)
-
-AddCommand("nora", function()
-for i,v in pairs(GetPlayer(args[2])) do
-local plr = Players[v]
-	
-if plr.Character:FindFirstChildOfClass("Humanoid").RigType == Enum.HumanoidRigType.R6 then
-			runinst(plr.Character["Right Arm"])
-		else
-			runinst(plr.Character["RightUpperArm"])
-end
-end
-end)
-
-AddCommand("nola", function()
-for i,v in pairs(GetPlayer(args[2])) do
-local plr = Players[v]
-	
-if plr.Character:FindFirstChildOfClass("Humanoid").RigType == Enum.HumanoidRigType.R6 then
-			runinst(plr.Character["Left Arm"])
-		else
-			runinst(plr.Character["LeftUpperArm"])
-end
-end
-end)
-
-AddCommand("norl", function()
-for i,v in pairs(GetPlayer(args[2])) do
-local plr = Players[v]
-	
-if plr.Character:FindFirstChildOfClass("Humanoid").RigType == Enum.HumanoidRigType.R6 then
-			runinst(plr.Character["Right Leg"])
-		else
-			runinst(plr.Character["RightUpperLeg"])
-end
-end
-end)
-
-AddCommand("noll", function()
-for i,v in pairs(GetPlayer(args[2])) do
-local plr = Players[v]
-	
-if plr.Character:FindFirstChildOfClass("Humanoid").RigType == Enum.HumanoidRigType.R6 then
-			runinst(plr.Character["Left Leg"])
-		else
-			runinst(plr.Character["LegUpperLeg"])
-end
-end
-end)
-
-AddCommand("nora", function()
-for i,v in pairs(GetPlayer(args[2])) do
-local plr = Players[v]
-	
-if plr.Character:FindFirstChildOfClass("Humanoid").RigType == Enum.HumanoidRigType.R6 then
-			runinst(plr.Character["Right Arm"])
-		else
-			runinst(plr.Character["RightUpperArm"])
-end
-end
-end)
-
-AddCommand("box", function()
-for i, v in pairs(GetPlayer(args[2])) do
-		for i, v in pairs(Players[v].Character:GetChildren()) do
-			if v:IsA("Accessory") then
-				runinst(v)
-			end
-		end
-		for i, v in pairs(Players[v].Character:GetChildren()) do
-			if v:IsA("CharacterMesh") then
-				runinst(v)
-			end
-		end
-		runinst(Players[v].Character:FindFirstChildOfClass("Pants"))
-		runinst(Players[v].Character:FindFirstChildOfClass("Shirt"))
-		runinst(Players[v].Character:FindFirstChildOfClass("ShirtGraphic"))
-		runinst(Players[v].Character["Left Arm"])
-		runinst(Players[v].Character["Left Leg"])
-		runinst(Players[v].Character["Right Arm"])
-		runinst(Players[v].Character["Right Leg"])
-		runinst(Players[v].Character.Head:FindFirstChildOfClass("SpecialMesh"))
-		runinst(Players[v].Character.Head:FindFirstChildOfClass("Decal"))
-	
-end
-end)
-
-AddCommand("noanim", function()
-for i,v in pairs(GetPlayer(args[2])) do
-local plr = Players[v]
-	
-runinst(plr.Character:FindFirstChildOfClass("Humanoid"):FindFirstChildOfClass("Animator"))
-end
-end)
-
-AddCommand("punish", function()
-for i,v in pairs(GetPlayer(args[2])) do
-local plr = Players[v]
-	
-runinst(plr.Character)
-end
-end)
-
-AddCommand("shirtless", function()
-for i,v in pairs(GetPlayer(args[2])) do
-local plr = Players[v]
-	
-runinst(plr.Character:FindFirstChildOfClass("Shirt"))
-end
-end)
-
-AddCommand("tshirtless", function()
-for i,v in pairs(GetPlayer(args[2])) do
-local plr = Players[v]
-	
-runinst(plr.Character:FindFirstChildOfClass("ShirtGraphic"))
-end
-end)
-
-AddCommand("blockchar", function()
-for i,v in pairs(GetPlayer(args[2])) do
-local plr = Players[v]
-for i, v in pairs(plr.Character:GetChildren()) do
-			if v:IsA("CharacterMesh") then
-				runinst(v)
-			end
-		end
-	end
-end)
-
-AddCommand("notools", function()
-for i,v in pairs(GetPlayer(args[2])) do
-for _, instance in pairs(Players[v]:FindFirstChildOfClass("Backpack"):GetChildren()) do
-			if not instance:IsA("BackpackItem") then
-			runinst(instance)
-end
-end
-
-end
-end)
-
-AddCommand("bald", function()
-for i,v in pairs(GetPlayer(args[2])) do
-for i, v in pairs(players) do
-		for i, v in pairs(Players[v].Character:GetChildren()) do
-			if v:IsA("Accessory") then
-				Destroy(v)
-			end
-end
-		end
-	end
-end)
-
-AddCommand("sink", function()
-for i,v in pairs(GetPlayer(args[2])) do
-local plr = Players[v]
-	
-runinst(plr.Character:FindFirstChild("HumanoidRootPart"))
-end
-end)
-
-AddCommand("slock", function()
-SLock = true
-end)
-
-AddCommand("unslock", function()
-SLock = false
-end)
-
-end
 
 AddCommand("jobid", function()
 	local jobId = 'Roblox.GameLauncher.joinGameInstance('..PlaceId..', "'..JobId..'")'
@@ -9824,6 +9585,246 @@ if not genv.foundRemote then
 end
 end
 
+task.wait(0.1)
+
+if carbackdf or delbackdf then
+AddCommand("naked", function()
+for i,v in pairs(GetPlayer(args[2])) do
+local plr = Players[v]
+		runinst(plr.Character:FindFirstChildOfClass("Pants"))
+		runinst(plr.Character:FindFirstChildOfClass("Shirt"))
+		runinst(plr.Character:FindFirstChildOfClass("ShirtGraphic"))
+	end
+end)
+
+AddCommand("faceless", function()
+for i,v in pairs(GetPlayer(args[2])) do
+local plr = Players[v]
+		runinst(plr.Character.Head:FindFirstChildOfClass("Decal"))
+	end
+end)
+SLock = false
+
+local banned = {}
+Players.PlayerAdded:connect(function(plr)
+	if SLock then
+		Destroy(plr)
+	end
+	if FindInTable(banned, plr.UserId) then
+		Destroy(plr)
+	end
+end)
+
+AddCommand("ban", function()
+for i,v in pairs(GetPlayer(args[2])) do
+local plr = Players[v]
+	table.insert(banned, plr.UserId)
+runinst(plr)
+end
+end)
+
+AddCommand("kick", function()
+for i,v in pairs(GetPlayer(args[2])) do
+local plr = Players[v]
+	
+runinst(plr)
+end
+end)
+
+AddCommand("nora", function()
+for i,v in pairs(GetPlayer(args[2])) do
+local plr = Players[v]
+	
+if plr.Character:FindFirstChildOfClass("Humanoid").RigType == Enum.HumanoidRigType.R6 then
+			runinst(plr.Character["Right Arm"])
+		else
+			runinst(plr.Character["RightUpperArm"])
+end
+end
+end)
+
+AddCommand("nola", function()
+for i,v in pairs(GetPlayer(args[2])) do
+local plr = Players[v]
+	
+if plr.Character:FindFirstChildOfClass("Humanoid").RigType == Enum.HumanoidRigType.R6 then
+			runinst(plr.Character["Left Arm"])
+		else
+			runinst(plr.Character["LeftUpperArm"])
+end
+end
+end)
+
+AddCommand("norl", function()
+for i,v in pairs(GetPlayer(args[2])) do
+local plr = Players[v]
+	
+if plr.Character:FindFirstChildOfClass("Humanoid").RigType == Enum.HumanoidRigType.R6 then
+			runinst(plr.Character["Right Leg"])
+		else
+			runinst(plr.Character["RightUpperLeg"])
+end
+end
+end)
+
+AddCommand("noll", function()
+for i,v in pairs(GetPlayer(args[2])) do
+local plr = Players[v]
+	
+if plr.Character:FindFirstChildOfClass("Humanoid").RigType == Enum.HumanoidRigType.R6 then
+			runinst(plr.Character["Left Leg"])
+		else
+			runinst(plr.Character["LegUpperLeg"])
+end
+end
+end)
+
+AddCommand("nora", function()
+for i,v in pairs(GetPlayer(args[2])) do
+local plr = Players[v]
+	
+if plr.Character:FindFirstChildOfClass("Humanoid").RigType == Enum.HumanoidRigType.R6 then
+			runinst(plr.Character["Right Arm"])
+		else
+			runinst(plr.Character["RightUpperArm"])
+end
+end
+end)
+
+AddCommand("box", function()
+for i, v in pairs(GetPlayer(args[2])) do
+		for i, v in pairs(Players[v].Character:GetChildren()) do
+			if v:IsA("Accessory") then
+				runinst(v)
+			end
+		end
+		for i, v in pairs(Players[v].Character:GetChildren()) do
+			if v:IsA("CharacterMesh") then
+				runinst(v)
+			end
+		end
+		runinst(Players[v].Character:FindFirstChildOfClass("Pants"))
+		runinst(Players[v].Character:FindFirstChildOfClass("Shirt"))
+		runinst(Players[v].Character:FindFirstChildOfClass("ShirtGraphic"))
+		runinst(Players[v].Character["Left Arm"])
+		runinst(Players[v].Character["Left Leg"])
+		runinst(Players[v].Character["Right Arm"])
+		runinst(Players[v].Character["Right Leg"])
+		runinst(Players[v].Character.Head:FindFirstChildOfClass("SpecialMesh"))
+		runinst(Players[v].Character.Head:FindFirstChildOfClass("Decal"))
+	
+end
+end)
+
+AddCommand("noanim", function()
+for i,v in pairs(GetPlayer(args[2])) do
+local plr = Players[v]
+	
+runinst(plr.Character:FindFirstChildOfClass("Humanoid"):FindFirstChildOfClass("Animator"))
+end
+end)
+
+AddCommand("punish", function()
+for i,v in pairs(GetPlayer(args[2])) do
+local plr = Players[v]
+	
+runinst(plr.Character)
+end
+end)
+
+AddCommand("shirtless", function()
+for i,v in pairs(GetPlayer(args[2])) do
+local plr = Players[v]
+	
+runinst(plr.Character:FindFirstChildOfClass("Shirt"))
+end
+end)
+
+AddCommand("tshirtless", function()
+for i,v in pairs(GetPlayer(args[2])) do
+local plr = Players[v]
+	
+runinst(plr.Character:FindFirstChildOfClass("ShirtGraphic"))
+end
+end)
+
+AddCommand("blockchar", function()
+for i,v in pairs(GetPlayer(args[2])) do
+local plr = Players[v]
+for i, v in pairs(plr.Character:GetChildren()) do
+			if v:IsA("CharacterMesh") then
+				runinst(v)
+			end
+		end
+	end
+end)
+
+AddCommand("notools", function()
+for i,v in pairs(GetPlayer(args[2])) do
+for _, instance in pairs(Players[v]:FindFirstChildOfClass("Backpack"):GetChildren()) do
+			if not instance:IsA("BackpackItem") then
+			runinst(instance)
+end
+end
+
+end
+end)
+
+AddCommand("bald", function()
+for i,v in pairs(GetPlayer(args[2])) do
+for i, v in pairs(players) do
+		for i, v in pairs(Players[v].Character:GetChildren()) do
+			if v:IsA("Accessory") then
+				Destroy(v)
+			end
+end
+		end
+	end
+end)
+
+AddCommand("sink", function()
+for i,v in pairs(GetPlayer(args[2])) do
+local plr = Players[v]
+	
+runinst(plr.Character:FindFirstChild("HumanoidRootPart"))
+end
+end)
+
+AddCommand("slock", function()
+SLock = true
+end)
+
+AddCommand("unslock", function()
+SLock = false
+end)
+
+end
+task.wait(0.1)
+if delbackdf or carbackdf then
+table.insert(list, 1, "-- BACKDOOR COMMANDS --")
+table.insert(list, 2, "[1] Kill {plr} - kills player")
+table.insert(list, 3, "[2] Naked {plr} - makes player naked")
+table.insert(list, 4, "[3] Faceless {plr} - makes player faceless")
+table.insert(list, 5, "[4] Ban {plr} - bans player")
+table.insert(list, 6, "[5] Unban {plr} - unbans player")
+table.insert(list, 7, "[6] Kick {plr} - kicks player")
+table.insert(list, 8, "[7] Nora {plr} - Removes players right arm")
+table.insert(list, 9, "[8] Nola {plr} - Removes players left arm")
+table.insert(list, 10, "[9] Norl {plr} - Removes players right leg")
+table.insert(list, 11, "[10] Noll {plr} - Removes players left leg")
+table.insert(list, 12, "[11] Blockchar {plr} - Makes players character look blocky")
+table.insert(list, 13, "[12] Noanim {plr} - Removes players animation")
+table.insert(list, 14, "[13] Punish {plr} - Punishes player (NOT UNDOABLE)")
+table.insert(list, 15, "[14] Shirtless {plr} - Removes players shirt")
+table.insert(list, 16, "[15] Tshirtless {plr} - Removes players tshirt")
+table.insert(list, 17, "[16] Box {plr} - Makes player a box")
+table.insert(list, 18, "[17] Notools {plr} - Removes all tools from players inventory")
+table.insert(list, 19, "[18] Bald {plr} - Makes player bald")
+table.insert(list, 20, "[19] Sink {plr} - Sinks player")
+table.insert(list, 21, "[20] Slock - Locks server")
+table.insert(list, 22, "[21] Unslock - Unlocks server")
+table.insert(list, 23, "-- NORMAL COMMANDS --")
+end
 
 if carbackdf or delbackdf then
 Notify({"rbxassetid://14549990176", Color3.fromRGB(0,0,0)}, "Backdoor Found!", "Deletion remote backdoor found! Commands will now be using the remote (more commands added in cmds list)", 15)
