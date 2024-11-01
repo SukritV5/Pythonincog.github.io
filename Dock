@@ -3382,7 +3382,9 @@ kplr.CharacterAdded:Wait():WaitForChild("HumanoidRootPart").CFrame = savedpos
 else
 if backdf or carbackdf then
 else
+if not backdf or carbackdf or delbackdf then
 Notify({"rbxassetid://14549990176", Color3.fromRGB(0,0,0)}, "Unsupported Game", "RejectCharacterDeletions is enabled command will not work.")
+end
 end
 end
 
