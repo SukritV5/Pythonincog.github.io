@@ -3353,11 +3353,13 @@ end
 end
 
 if carbackdf or delbackdf then
+pcall(function()
 if Players[v].Character:FindFirstChildOfClass("Humanoid").RigType == Enum.HumanoidRigType.R6 then
 			runinst(Players[v].Character.Torso.Neck)
 		else
 			runinst(Players[v].Character.Head.Neck)
 		end
+		end)
 end
 
 end
@@ -3381,7 +3383,9 @@ kplr.CharacterAdded:Wait():WaitForChild("HumanoidRootPart").CFrame = savedpos
 else
 if backdf or carbackdf then
 else
+if not delbackdf then
 Notify({"rbxassetid://14549990176", Color3.fromRGB(0,0,0)}, "Unsupported Game", "RejectCharacterDeletions is enabled command will not work.")
+end
 end
 end
 
