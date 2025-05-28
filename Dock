@@ -951,7 +951,8 @@ local CMDBAKDOR = Instance.new("ImageButton")
 local CMDBARKTB = Instance.new("TextBox")
 
 CMDBARK.Name = "CMDBARK"
-CMDBARK.Parent = CoreGui
+CMDBARK.Parent = gethui() or CoreGui
+CMDBARK.DisplayOrder = 9e99
 
 CMDBARF.Name = "CMDBARF"
 CMDBARF.Parent = CMDBARK
@@ -1230,7 +1231,8 @@ end)
 -- << Create GUI >> --
 
 local gui = createnew('ScreenGui', {
-Parent = CoreGui; --services.plrgui;
+Parent = gethui() or CoreGui; --services.plrgui;
+DisplayOrder = 9e99;
 Name = 'KrunoxBeta';
 })
 local pingui = createnew('ScreenGui',{
@@ -1461,16 +1463,6 @@ top.Changed:connect(function(ch)
 if ch == 'Position' then
 newWindow.Position = newWindow.Position + top.Position - UDim2.new(0, 31, 0, 0) 
 top.Position = UDim2.new(0, 31, 0, 0)
-end
-end)
-
-newWindow.Changed:connect(function(ch)
-if ch == 'AbsolutePosition'then
-if newWindow.AbsolutePosition.Y < 0 then
-newWindow.Position = UDim2.new(newWindow.Position.X,UDim.new(0,0))
-elseif newWindow.AbsolutePosition.Y > gui.AbsoluteSize.Y - 30 then
-newWindow.Position = UDim2.new(newWindow.Position.X,UDim.new(0,gui.AbsoluteSize.Y - 30))
-end
 end
 end)
 
@@ -5980,8 +5972,8 @@ tabHolder.About.MouseButton1Click:Connect(function()
 local window = Window.new({width = 300, height = 350, name='About', icon='rbxassetid://894507994'})
 
 local Content = window.Content
-local Logo = CreateInstance('TextLabel',{Font=Enum.Font.BuilderSansExtraBold,FontSize=Enum.FontSize.Size36,Text='KRUNOX v5',TextColor3=Color3.fromRGB(255,255,255),TextScaled=false,TextSize=33,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=Enum.TextXAlignment.Left,TextYAlignment=Enum.TextYAlignment.Center,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.0500000007, 0, 0.0406249985, 0),Rotation=0,Selectable=false,Size=UDim2.new(0, 200, 0, 50),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Logo',Parent = Content})
-local Developers = CreateInstance('TextLabel',{Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size24,Text='Krunox is a multi-purpose script for many things and is the only script you will ever need as it has almost everything other script hubs and admin scripts provide\nCreated by Tesker103 (@getrenq) on ROBLOX or Discord',TextColor3=Color3.fromRGB(255,255,255),TextScaled=false,TextSize=23,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=true,TextXAlignment=Enum.TextXAlignment.Left,TextYAlignment=Enum.TextYAlignment.Top,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.0500000007, 0, 0.296875, 0),Rotation=0,Selectable=false,Size=UDim2.new(0, 271, 0, 131),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Developers',Parent = Content})
+local Logo = CreateInstance('TextLabel',{Font=Enum.Font.BuilderSansExtraBold,FontSize=Enum.FontSize.Size36,Text='KRUNOX v4.1',TextColor3=Color3.fromRGB(255,255,255),TextScaled=false,TextSize=33,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=Enum.TextXAlignment.Left,TextYAlignment=Enum.TextYAlignment.Center,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.0500000007, 0, 0.0406249985, 0),Rotation=0,Selectable=false,Size=UDim2.new(0, 200, 0, 50),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Logo',Parent = Content})
+local Developers = CreateInstance('TextLabel',{Font=Enum.Font.SourceSansLight,FontSize=Enum.FontSize.Size24,Text='Krunox is a multi-purpose script for many things and is the only script you will ever need as it has almost everything other script hubs and admin scripts provide Created by Tesker103 (@getrenq) on ROBLOX or Discord',TextColor3=Color3.fromRGB(255,255,255),TextScaled=false,TextSize=23,TextStrokeColor3=Color3.fromRGB(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=true,TextXAlignment=Enum.TextXAlignment.Left,TextYAlignment=Enum.TextYAlignment.Top,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.fromRGB(255,255,255),BackgroundTransparency=1,BorderColor3=Color3.fromRGB(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.0500000007, 0, 0.296875, 0),Rotation=0,Selectable=false,Size=UDim2.new(0, 271, 0, 13991),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=8,Name='Developers',Parent = Content})
 end)
 
 
