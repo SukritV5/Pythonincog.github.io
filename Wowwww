@@ -1,0 +1,74 @@
+local NumberValue = Instance.new("NumberValue")
+local nv_mt = getrawmetatable(NumberValue) -- Get the metatable for NumberValue instances
+NumberValue:Destroy() -- Clean up the temporary instance
+
+-- Make the metatable writable (if it's not already)
+make_writeable(nv_mt)
+
+-- Store the original __index and __newindex if they exist
+local old_nv_index = nv_mt.__index
+local old_nv_newindex = nv_mt.__newindex
+
+-- Create a WeakMap (table with weak keys) to store the custom 'Anchored' state for each NumberValue
+-- Keys (instances) will be garbage collected if no other references exist.
+local customAnchoredStates = setmetatable({}, {__mode = "k"}) -- Weak keys
+
+-- Overwrite __index
+nv_mt.__index = function(self, key)
+    if key == "Anchored" then
+        -- Return the custom 'Anchored' state for this specific instance
+        -- If not set yet, default to false (or whatever you prefer)
+        return customAnchoredStates[self] or false
+    end
+
+    -- If the key is not 'Anchored', try the original __index
+    if old_nv_index then
+        return old_nv_index(self, key)
+    else
+        -- If no original __index, default Lua behavior (nil for non-existent)
+        return nil
+    end
+end
+
+-- Overwrite __newindex
+nv_mt.__newindex = function(self, key, value)
+    if key == "Anchored" then
+        -- Store the 'value' for the 'Anchored' property in our custom table
+        customAnchoredStates[self] = value
+        return
+    end
+
+    -- If the key is not 'Anchored', use the original __newindex
+    if old_nv_newindex then
+        old_nv_newindex(self, key, value)
+    else
+        -- Default Lua behavior: set the property directly on the table (though for Instances,
+        -- this usually means setting a Roblox-defined property)
+        rawset(self, key, value)
+    end
+end
+
+print("why u looking here")
+
+
+local mt = getrawmetatable(game)
+make_writeable(mt)
+local old_index = mt.__index
+
+mt.__index = function(a, b)
+    -- First, check if the object is a NumberValue by using the original __index to find the IsA method.
+    -- The 'pcall' is added for safety to prevent errors if 'a' is not a valid instance.
+    local success, isNumberValue = pcall(function()
+        return old_index(a, "IsA") and a:IsA("NumberValue")
+    end)
+
+    if success and isNumberValue then
+        -- If it is a NumberValue, then we check if the requested property is "ClassName".
+        if b == "ClassName" then
+            return "Part" -- Return our fake ClassName
+        end
+    end
+    
+    -- For any other property or if the object isn't a NumberValue, use the original behavior.
+    return old_index(a, b)
+end
