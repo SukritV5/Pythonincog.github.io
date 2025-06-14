@@ -167,3 +167,6 @@ SetProperty = SetProperty,
 SetModuleProperty = SetModuleProperty,
 SetGcValue = SetGcValue
 })
+
+
+print("Loaded")
