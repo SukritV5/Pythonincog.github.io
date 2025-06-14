@@ -3,7 +3,7 @@ local function SetValue(str,val)
 local garbage = getgc(true)
 
 for i, Table in next, garbage do
-if type(Table) == "table" and rawget(Table, str) then
+if type(Table) == "table" and rawget(Table, str) and not table.isfrozen(Table) then
 rawset(Table, str, val)
 print("SetValue - Method Completed " .. str .. "Set To " .. val)
 end
@@ -40,11 +40,12 @@ local function SetGcValue(str,val)
 local garbage = getgc(true)
 
 for i, Table in next, garbage do
-if type(Table) == "table" and rawget(Table, str) then
+if type(Table) == "table" and rawget(Table, str) and not table.isfrozen(Table) then
 rawset(Table, str, val)
 print("SetGarbageCollectionValue - Method Completed " .. str .. "Set To " .. val)
 end
 end
+
 end
 
 local function AddProperty(inst,prop)
@@ -167,6 +168,3 @@ SetProperty = SetProperty,
 SetModuleProperty = SetModuleProperty,
 SetGcValue = SetGcValue
 })
-
-
-print("Loaded")
