@@ -1,13 +1,51 @@
+local fnl = loadstring(game:HttpGetAsync 'https://raw.githubusercontent.com/Code1Tech/utils/main/notification.lua')()
+
+
+
+-- Make a Notification function
+
+function notify(title, text, duration)
+
+  title = title or "Notification"
+
+  text = text or "No text provided."
+
+  duration = duration or 5
+
+  
+
+  fnl:MakeNotification({
+
+    Title = title,
+
+    Text = text,
+
+    Duration = duration
+
+  })
+
+end
+
+
+
+notify("Loaded", "DebugTools - Made By Tesker103 on Youtube", 3)
+
 
 local function SetValue(str,val)
-local garbage = getgc(true)
+foundvalue = false
 
-for i, Table in next, garbage do
-if type(Table) == "table" and rawget(Table, str) and not table.isfrozen(Table) then
-rawset(Table, str, val)
-print("SetValue - Method Completed " .. str .. "Set To " .. val)
-end
-end
+    local garbage = getgc(true)
+
+    for i, Table in next, garbage do
+        if type(Table) == "table" and not table.isfrozen(Table) then
+            if rawget(Table, str) ~= nil then
+                rawset(Table, str, val)
+                foundvalue = true
+            end
+        end
+    end
+    
+    
 
 local stam = nil
 
@@ -16,6 +54,12 @@ if v.Name == str then
 stam = v
 break
 end
+end
+
+if foundvalue then
+notify("Success","Garbage Collection Value " .. str .. " Set To " .. tostring(val))
+else
+notify("Error","Garbage Collection Value " .. str .. " Not Found")
 end
 
 if not stam then
@@ -28,8 +72,10 @@ local stamh;
 stamh = hookmetamethod(game, "__index", function(self, v)
 
 if self == stam and v == "Value" then
-print("SetValue - Method 2 (hookmetamethod) Completed " .. str .. "Set To " .. val)
+notify("Success","by HookMetaMethod Value " .. str .. " Set To " .. tostring(val))
 return val
+else
+notify("Error","HookMetaMethod Value " .. str .. " Not Found")
 end
 return stamh(self, v)
 end)
@@ -112,7 +158,7 @@ local function SetModuleProperty(moduleName, propertyName, newValue)
     end
 
     if not moduleScript then
-        warn("ModuleScript '" .. moduleName .. "' not found!")
+        notify("Error","ModuleScript " .. moduleName .. " Not Found")
         return false -- Indicate failure
     end
 
@@ -164,7 +210,6 @@ SetEnvironment({
 SetValue = SetValue,
 AddProperty = AddProperty,
 LoopSetProperty = LoopSetProperty,
-SetProperty = SetProperty,
 SetModuleProperty = SetModuleProperty,
 SetGcValue = SetGcValue
 })
